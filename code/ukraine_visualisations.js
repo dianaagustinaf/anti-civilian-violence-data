@@ -49,11 +49,11 @@ function plotCharts(location){
         var location_array_res = location_array[0];
 
         // Bar Chart - fatalities over time?
-        var location_id = 
+        //var location_id = 
 
-        var yticks = 
+        //var yticks = 
 
-        var barData = [
+        //var barData = [
             {
                 x: location_values.slice(0,10).reverse(),
                 y: yticks,
@@ -64,3 +64,5 @@ function plotCharts(location){
         // create div bar in html shannon 
         var barLayout = {title: "Civilian Fatalities: Conflict from 2018-present"};
         Plotly.newPlot("bar", barData, barLayout);
+    }
+    )};
