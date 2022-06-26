@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+​
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  <title>Anti-Civilian Violence Data</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+​
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand text-light-green" href="index.html">Anti-Civilian Violence</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Plots
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" href="visualizations/1_viz.html">Ukraine</a></li>
+                    <li><a class="dropdown-item" href="visualizations/2_viz.html">Regional Data</a></li>
+                    <li><a class="dropdown-item" href="visualizations/3_viz.html">Global Data</a></li>
+                </ul>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link active" href="comparison.html">Comparison</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="data.html">Data</a>
+                </li>
+
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <br>
+    </section>
+
+
+    <!-- SUMARY -->
+    <section>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+
+            <h1 class="dark:bg-primary dark:text-white">Project Summary</h1>
+            <br>
+            <h5 class="text-light-green">Anti-Civilian Violence Data Analysis</h5>
+            <br>
+            <p>{{ txt }}</p>
+            <p> 
+                As a result of international news outlets highlighting violence against civilians 
+                in the Russian invasion of Ukraine we want to visualise the data gathered by ACLED 
+                and see what patterns we could interpret. We are intrigued to see if there was a 
+                distinction between the frequency of occurrence and fatality count pre-Russian invasion and post. 
+                Also to identify any significant changes since the beginning of the invasion and the progression 
+                of the conflict. 
+
+                Finally, we will make a comparison with the rest of Europe and globally to draw a conclusion; 
+                is this type of violence an exceptional case?
+                <!-- 
+                <a class="text-light-green" target="_blank"
+                href="https://www.link">
+                GREEN LINK </a> 
+                 -->
+                These are the results found in the analysis. 
+            </p>
+            </div>
+
+            <div class="col-lg-6">
+                
+                <div class="container">
+                    <div class="row">
+
+                        <h1 class="dark:bg-primary dark:text-white">Visualizations</h1>
+
+                        <div class="col-md-6">
+                            <a href="visualizations/1_viz.html">
+                                <img width="100%" src="assets/images/heat.JPG" alt="" />
+                            </a>
+                            <a href="visualizations/2_viz.html">
+                                <img width="100%" src="assets/images/line.JPG" alt="" />
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="visualizations/3_viz.html">
+                                <img width="100%" src="assets/images/heat.JPG" alt="" />
+                            </a>
+                            <a href="visualizations/4_viz.html">
+                                <img width="100%" src="assets/images/line.JPG" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    ​
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
