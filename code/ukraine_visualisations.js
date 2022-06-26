@@ -6,6 +6,7 @@ function ukraine_data(){
     var ukraine = d3.select("#ukraine_data");
 
     d3.json("ASK_DIANA.json").then((data) => {
+        // chnage locations to sub-type?
         var locations = data.locations;
 // 'option' - in html? - need to add in 
 // look through html - where does the corresponding code go?
