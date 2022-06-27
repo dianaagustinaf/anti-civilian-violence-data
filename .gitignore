@@ -1,5 +1,5 @@
 # Ignore Doc
-
+/resources/civilians_raw.csv
 config.py
 pg_keys.py
 
