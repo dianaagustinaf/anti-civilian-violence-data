@@ -7,12 +7,13 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify, render_template
 
-from pg_keys import pg_key
+# from pg_keys import pg_key
+pg_key = "Leah0608"
 
 #################################################
 # Database Setup
 
-connection_string = (f'postgres:{pg_key}@localhost:5432/anti_violence_db')
+connection_string = f'postgres:{pg_key}@localhost:5432/anti_violence_db'
 engine = create_engine(f'postgresql://{connection_string}')
 
 # reflect an existing database into a new model
@@ -95,7 +96,7 @@ def ukrGeoJson():
 
     session.close()
 
-    # all_properties = []
+    # all_properties = [] 
 
     # for year, event_date, event_type, sub_event_type, \
     #     country, location, latitude, longitude, fatalities, notes in results:
