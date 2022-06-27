@@ -133,7 +133,7 @@ def ukrGeoJson():
                 "latitude": str(latitude),
                 "longitude": str(longitude),
                 "fatalities": str(fatalities),
-                "notes": str(notes)
+                "notes": notes
             },
         } for year, event_date, event_type, sub_event_type, \
         country, location, latitude, longitude, fatalities, notes in results]
@@ -146,6 +146,15 @@ def ukrGeoJson():
     ## this send the data to he html
     ## make the script / d3 inside the html???
 
+
+############################
+# Error
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
+
+############################
 
 if __name__ == '__main__':
     app.run(debug=True)
