@@ -103,10 +103,9 @@ def ukraine():
         region, country, location, latitude, longitude, \
         fatalities, notes, source in results]
     }
-
     #print(geojson)
-    return geojson
-    #return render_template('1_viz_ukr.html', geojson=geojson)
+    #return geojson
+    return render_template('1_viz_ukr.html', geojson=geojson)
 
     ## this send the data to he html
     ## make the script / d3 inside the html???
@@ -160,10 +159,8 @@ def globaldata():
         region, country, location, latitude, longitude, \
         fatalities, notes, source in results]
     }
-
-    #print(geojson)
-    return geojson
-    #return render_template('3_viz_global.html', geojson=geojson)
+    #return geojson
+    return render_template('3_viz_global.html', geojson=geojson)
 
 
 ############################

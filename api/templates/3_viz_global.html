@@ -53,24 +53,11 @@
   <section>
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-9">
 
-                <div class="card mb-3">
-                    <img src="../assets/images/heat.JPG" class="card-img-top" 
-                        alt="Valence Distribution">
-                    <div class="card-body">
-                      <h5 class="card-title">Valence Distribution</h5>
-                      <p class="card-text">
-                        Valence is a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a 
-                        track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), 
-                        while tracks with low valence sound more negative (e.g. sad, depressed, angry).
-                        The median for the most played songs is 0,45, i.e. we are in the middle
-                        but we have a tendency towards sad songs.
-                      </p>
-                      <p class="card-text"><small class="text-muted"> 
-                          <a href="4_correlation.html" class="text-light-green"> Next viz </a></small></p>
-                    </div>
-                </div>
+                <p> GLOBAL </p>
+
+                 
             </div> 
         </div>
     </div>       
@@ -79,6 +66,10 @@
   ​
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-    
+<script>
+    var data = {{geojson|tojson}};
+</script>
+<script src="/static/js/3_viz_global.js"> </script>
+
 </body>
 </html>
