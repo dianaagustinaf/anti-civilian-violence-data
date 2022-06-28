@@ -2,11 +2,30 @@
 <html lang="en-us">
 ​
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-  <title>Anti-Civilian Violence Data</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Anti-Civilian Violence Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+  </head>
 ​
 <body>
 
@@ -84,23 +103,35 @@
                 
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-12">
+                          <div class="well">
+                            <h3>Ukraine: Violence Against Civilians Events (by location):</h5>
+                            <select id="ukraine_data" onchange="optionChanged(this.value)"></select>
+                          </div>
+                          <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h5 class="panel-title">Info</h3>
+                            </div>
+                            <div id="location-metadata" class="panel-body"></div>
+                          </div>
+                    <div class="row">
 
-                        <h1 class="dark:bg-primary dark:text-white">Visualizations</h1>
+                        <h1 class="dark:bg-primary dark:text-white">Visualisations</h1>
 
-                        <div class="col-md-6">
-                            <a href="visualizations/1_viz.html">
-                                <img width="100%" src="assets/images/heat.JPG" alt="" />
-                            </a>
-                            <a href="visualizations/2_viz.html">
-                                <img width="100%" src="assets/images/line.JPG" alt="" />
+                        <div class="col-md-12">
+                            <h5>Ukraine: Violence Against Civilians Map Plot</h5>
+                                <div id="my_map" style="width: 600px; height: 400px"></div>/>
+                            <h5>Ukraine: Fatality Count by Sub-Event Type</h5>
+                            <a href="visualizations/2_viz.html"></a>
+                                <div id="bar" style="width: 600px; height: 400px"></div>
                             </a>
                         </div>
                         <div class="col-md-6">
                             <a href="visualizations/3_viz.html">
-                                <img width="100%" src="assets/images/heat.JPG" alt="" />
+                                <img width="100%" src="../../assets/images/heat.JPG" alt="" />
                             </a>
                             <a href="visualizations/4_viz.html">
-                                <img width="100%" src="assets/images/line.JPG" alt="" />
+                                <img width="100%" src="../../assets/images/line.JPG" alt="" />
                             </a>
                         </div>
                     </div>
@@ -112,6 +143,129 @@
 
     ​
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <!----------------------------->
+  <!----------------------------->  
+  <!-- Our Maps -->
+  <!----------------------------->
+  <!----------------------------->
+    <!-- <script type="text/javascript" src="../../static/js/ukriane_map.js"></script> -->
+  <script>
+    var data = {{gj |safe}}
+    // create map
+    var myMap = L.map("my_map", {
+    center: [49.05, 33.22],
+    zoom: 6
+  });
 
+  // Add tile layer 
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+ }).addTo(myMap);
+
+// loop over geojson to find radius size 
+// for(var i=0; i < data.feature.length; i++) {
+//   var radius = Math.sqrt(data.feature[i].properties.fatalities)*10,
+// };
+
+var markers = {
+    opacity: 1,
+    fillOpacity: 1,
+    fillColor: "red",
+    color: "red",
+    // fatality count 
+    // radius: radius
+    radius: 3,
+    stroke: true,
+    weight: 0.5
+};
+
+// shan add layer here = each year or sub event type?
+
+L.geoJSON(data, {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, markers);
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("Location: " + feature.properties.location + "<br> Event Date: " + feature.properties.event_data + "<br>Sub-Event Type: " + feature.properties.sub_event_type + "<br>Fatalities: " + feature.properties.fatalities)
+        // layer.on({
+        // mouseover: highlightFeature,
+        // mouseout: resetHighlight,
+        // click: zoomToFeature
+        // });
+    }
+    }).addTo(myMap);
+
+  </script>
+  <!----------------------------->
+  <!----------------------------->
+  <!-- Panel JS -->
+  <!----------------------------->
+  <!----------------------------->
+  <script>
+  // Funnel in Ukraine data
+    function ukraine_data() {
+        var ukraine = d3.select("#ukraine_data");
+        // I don't think I am using the geojson correctly 
+        // go over this in class 
+        var data = {{gj |safe}}
+            // change on locations
+            var locations = data.feature.properties.location;
+            
+            locations.forEach((location) => {
+                ukraine.append("option").text(location).property("value", location);
+            });
+            // these are the locations
+            var firstLocation = locations[0];
+            chooseLocation(first_location);
+        }
+
+    ukraine_data();
+
+    function optionChanged(location) {
+        chooseLocation(location);
+    }
+
+    function chooseLocation(location){
+        (data) => {
+        var metadata = data.metadata;
+        var resultsarray = metadata.filter(locationobj => location == location);
+        var results = resultsarray[0]
+        // link to html panel to visulise data 
+        var panel = d3.select("#location-metadata");
+        panel.html("");
+        Object.entries(results).forEach(([key, value]) => {
+            panel.append("h6").text(`${key.toUpperCase()}:${value}`);
+        });
+    };
+    }
+</script>
+<!----------------------------->
+<!----------------------------->
+<!-- Plots JS -->
+<!----------------------------->
+<!----------------------------->
+<script>
+    // how to funnel in geojson data to use for plots? Same issue as panel 
+    function plotCharts() {
+
+    
+    // ids, labels, values
+
+    // data 
+    varData = [
+        {
+            x: data.feature.properties.event_date,
+            y: data.features.properties.fatalities,
+            text: ,
+            type: "bar"
+        }
+    ];
+
+    var barLayout = {title: "Fatalities over time: 2018-2022"};
+    // plot
+    Plotly.newPlot("bar", barData, barLayout);
+    };
+
+</script>
 </body>
 </html>
