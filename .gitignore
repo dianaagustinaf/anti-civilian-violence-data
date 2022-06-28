@@ -1,6 +1,8 @@
 # Ignore Doc
-
+/resources/civilians_raw.csv
+/resources/civilians_clean_data.csv
 config.py
+pg_keys.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
