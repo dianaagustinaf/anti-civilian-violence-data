@@ -45,12 +45,14 @@ def welcome():
     txt2 ="http://127.0.0.1:5000/api/v1.0/region1"
     txt3 ="http://127.0.0.1:5000/api/v1.0/region2"
     txt4 ="http://127.0.0.1:5000/api/v1.0/globaldata"
+    txt5 ="http://127.0.0.1:5000/api/v1.0/datacled"
     
     listurl = []
     listurl.append(txt1)
     listurl.append(txt2)
     listurl.append(txt3)
     listurl.append(txt4)
+    listurl.append(txt5)
 
     return render_template("index.html", txt=txt, listurl=listurl)
 
@@ -162,6 +164,17 @@ def globaldata():
     #return geojson
     return render_template('3_viz_global.html', geojson=geojson)
 
+
+
+
+
+############################
+# DATA
+
+@app.route("/api/v1.0/datacled")
+def datacled():
+    txt = "Source: ACLED -  Make this text better XD"
+    return render_template("data.html", txt=txt)
 
 ############################
 # Error
