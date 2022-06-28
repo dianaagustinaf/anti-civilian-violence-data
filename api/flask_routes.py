@@ -7,8 +7,7 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify, render_template
 
-# from pg_keys import pg_key
-pg_key = "Leah0608"
+from pg_keys import pg_key
 
 #################################################
 # Database Setup
@@ -40,61 +39,156 @@ app = Flask(__name__)
 @app.route("/")
 def welcome():
     
-    txt = """List all available api routes
+    txt = "List all available api routes"
+
+    txt1 ="http://127.0.0.1:5000/api/v1.0/ukraine"
+    txt2 ="http://127.0.0.1:5000/api/v1.0/region1"
+    txt3 ="http://127.0.0.1:5000/api/v1.0/region2"
+    txt4 ="http://127.0.0.1:5000/api/v1.0/globaldata"
     
-        Available Routes:
-        /api/v1.0/ukrevents
-        /api/v1.0/ukrGeoJson
-        /api/v1.0/regionalevents
-        /api/v1.0/globalevents
-    """
-    return render_template("index.html", txt=txt)
+    listurl = []
+    listurl.append(txt1)
+    listurl.append(txt2)
+    listurl.append(txt3)
+    listurl.append(txt4)
 
-
-@app.route("/api/v1.0/ukrevents")
-def ukrevents():
-
-    session = Session(engine)
-
-    """Return ukraine data"""
-    #results = session.query(Data.country).all()
- 
-    results = session.query(Data.index, Data.year, Data.country, Data.latitude, Data.longitude)\
-        .filter(Data.country == "Ukraine").all()
-
-    session.close()
-
-    #all_names = list(np.ravel(results))
-    #print(all_names)
-    #return jsonify(all_names)
-
-    all_events = []
-
-    for index, year, country, latitude, longitude in results:
-        event_dict = {}
-        event_dict["index"] = str(index)
-        event_dict["year"] = str(year)
-        event_dict["country"] = str(country)
-        event_dict["latitude"] = str(latitude)
-        event_dict["longitude"] = str(longitude)
-        all_events.append(event_dict)
-
-    return jsonify(all_events)
+    return render_template("index.html", txt=txt, listurl=listurl)
 
 
 ########################################################################
 
-@app.route("/api/v1.0/ukrGeoJson")
-def ukrGeoJson():
+@app.route("/api/v1.0/ukraine")
+def ukraine():
 
     session = Session(engine)
 
     #QUERY
     results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
-        Data.country, Data.location, Data.latitude, Data.longitude, Data.fatalities, Data.notes)\
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
         .filter(Data.country == "Ukraine").all()
 
     session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+
+    #print(geojson)
+    return geojson
+    #return render_template('1_viz_ukr.html', geojson=geojson)
+
+    ## this send the data to he html
+    ## make the script / d3 inside the html???
+
+
+########################################################################
+
+@app.route("/api/v1.0/globaldata")
+def globaldata():
+
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.year == 2022).all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+
+    #print(geojson)
+    return geojson
+    #return render_template('3_viz_global.html', geojson=geojson)
+
+
+############################
+# Error
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
+
+############################
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+############################################
+#formatting
 
     # all_properties = [] 
 
@@ -114,50 +208,32 @@ def ukrGeoJson():
     #     all_properties.append(event_dict)
 
     #return jsonify(all_properties)
-   
-    geojson = {
-        "type": "FeatureCollection",
-        "features": [
-        {
-            "type": "Feature",
-            "geometry" : {
-                "type": "Point",
-                "coordinates": [str(longitude), str(latitude)],
-                },
-            "properties" : {
-                "year": str(year),
-                "event_date": str(event_date),
-                "event_type": str(event_type),
-                "sub_event_type": str(sub_event_type),
-                "country": str(country),
-                "location": str(location),
-                "latitude": str(latitude),
-                "longitude": str(longitude),
-                "fatalities": str(fatalities),
-                "notes": notes
-            },
-        } for year, event_date, event_type, sub_event_type, \
-        country, location, latitude, longitude, fatalities, notes in results]
-    }
-
-    #print(geojson)
-    return geojson
-    # return render_template('index.html', gj=geojson)
-
-    ## this send the data to he html
-    ## make the script / d3 inside the html???
 
 
-############################
-# Error
+# @app.route("/api/v1.0/ukrevents")
+# def ukrevents():
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('error.html'), 404
+#     session = Session(engine)
 
-############################
+#     """Return ukraine data"""
+#     #results = session.query(Data.country).all()
+ 
+#     results = session.query(Data.index, Data.year, Data.country, Data.latitude, Data.longitude)\
+#         .filter(Data.country == "Ukraine").all()
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#     session.close()
 
+#     #all_names = list(np.ravel(results))
 
+#     all_events = []
+
+#     for index, year, country, latitude, longitude in results:
+#         event_dict = {}
+#         event_dict["index"] = str(index)
+#         event_dict["year"] = str(year)
+#         event_dict["country"] = str(country)
+#         event_dict["latitude"] = str(latitude)
+#         event_dict["longitude"] = str(longitude)
+#         all_events.append(event_dict)
+
+#     return jsonify(all_events)
