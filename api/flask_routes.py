@@ -115,6 +115,42 @@ def ukraine():
 
 ########################################################################
 
+
+@app.route("/api/v1.0/region1")
+def region1():
+
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(Data.year, func.sum(Data.fatalities).label("total_fatalities"))\
+        .group_by(Data.country and Data.year).filter(Data.country == "Ukraine").all()
+
+    session.close()
+   
+    geojson = [
+        [{
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "properties" : {
+                "year": str(year),
+                "fatalities": str(fatalities)
+            },
+        }] for year, fatalities in results]
+
+    #print(geojson)
+    #return geojson
+    return render_template('2_viz_region1.html', geojson=geojson)
+
+
+
+
+########################################################################
+
+
 @app.route("/api/v1.0/globaldata")
 def globaldata():
 
