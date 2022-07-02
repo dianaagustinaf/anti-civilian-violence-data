@@ -1,4 +1,4 @@
-console.log(data);
+//console.log(data);
 
 
 // var data = {{ geojson|safe }};
@@ -21,7 +21,7 @@ console.log(data);
 // }
 var myMap = L.map("my_map", {
     center: [49.05, 33.22],
-    zoom: 1, 
+    zoom: 3, 
     // layers: [
     //     layers.2018, 
     //     layers.2019, 
@@ -60,8 +60,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //     }
 
 var markers = {
-    opacity: 1,
-    fillOpacity: 1,
+    opacity: 0.7,
+    fillOpacity: 0.7,
     fillColor: "orange",
     color: "orange",
     //radius: fatalities
@@ -76,8 +76,8 @@ L.geoJSON(data, {
         return L.circleMarker(latlng, markers);
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup("Location: " + feature.properties.location
-            + "<br> Event Date: " + feature.properties.event_date
+        layer.bindPopup("<h3> Location: " + feature.properties.location
+            + "</h3> <br> Event Date: " + feature.properties.event_date
             + "<br>Sub-Event Type: " + feature.properties.sub_event_type
             + "<br>Fatalities: " + feature.properties.fatalities
             + "<br>Notes: " + feature.properties.notes)

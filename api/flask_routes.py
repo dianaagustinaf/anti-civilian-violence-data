@@ -41,18 +41,18 @@ def welcome():
     
     txt = "List all available api routes"
 
-    txt1 ="http://127.0.0.1:5000/api/v1.0/ukraine"
-    txt2 ="http://127.0.0.1:5000/api/v1.0/region1"
-    txt3 ="http://127.0.0.1:5000/api/v1.0/region2"
-    txt4 ="http://127.0.0.1:5000/api/v1.0/globaldata"
-    txt5 ="http://127.0.0.1:5000/api/v1.0/datacled"
+    ukr ="http://127.0.0.1:5000/api/v1.0/ukraine"
+    reg1 ="http://127.0.0.1:5000/api/v1.0/region1"
+    reg2 ="http://127.0.0.1:5000/api/v1.0/region2"
+    glo ="http://127.0.0.1:5000/api/v1.0/globaldata"
+    dat ="http://127.0.0.1:5000/api/v1.0/datacled"
     
     listurl = []
-    listurl.append(txt1)
-    listurl.append(txt2)
-    listurl.append(txt3)
-    listurl.append(txt4)
-    listurl.append(txt5)
+    listurl.append(ukr)
+    listurl.append(reg1)
+    listurl.append(reg2)
+    listurl.append(glo)
+    listurl.append(dat)
 
     return render_template("index.html", txt=txt, listurl=listurl)
 
@@ -171,6 +171,63 @@ def region1():
     #print(geojson)
     #return geojson
     return render_template('2_viz_region1.html', geojson=geojson)
+
+
+########################################################################
+
+@app.route("/api/v1.0/region2")
+def region2():
+
+    session = Session(engine)
+
+    # #QUERY
+    # results = session.query(Data.year, func.sum(Data.fatalities).label("total_fatalities"))\
+    #     .group_by(Data.country and Data.year).filter(Data.country == "Ukraine").all()
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.region == "Middle East").all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+    #print(geojson)
+    #return geojson
+    return render_template('2_viz_region2.html', geojson=geojson)
 
 
 ########################################################################

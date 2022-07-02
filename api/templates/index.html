@@ -17,7 +17,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light-green" href="index.html">Anti-Civilian Violence</a>
+            <a class="navbar-brand text-light-orange" href="index.html">Anti-Civilian Violence</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,26 +28,25 @@
 
                 <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="1_viz_ukr.html">Ukraine</a>
-                        <!-- LINK TO FLASK INSTEAD OF HTML -->
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/ukraine">Ukraine</a>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Regions
+                            Regional Data
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="2_viz_region1.html">Region 1</a></li>
-                            <li><a class="dropdown-item" href="2_viz_region2.html">Region 2</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="3_viz_global.html">Global Data</a>
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global Data</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../../data.html">Data</a>
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/datacled">Data</a>
                     </li>
 
                 </ul>
@@ -68,7 +67,7 @@
 
                     <h1 class="dark:bg-primary dark:text-white">Project Summary</h1>
                     <br>
-                    <h5 class="text-light-green">Anti-Civilian Violence Data Analysis</h5>
+                    <h5 class="text-light-orange">Anti-Civilian Violence Data Analysis</h5>
                     <br>
                     <p>{{ txt }}</p>
 
