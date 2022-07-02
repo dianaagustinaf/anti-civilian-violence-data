@@ -239,18 +239,14 @@ def globaldata():
     session = Session(engine)
 
     #QUERY
-    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
-        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
-        Data.fatalities, Data.notes, Data.source)\
-        .filter(Data.year == 2022).all()
+    results = session.query(func.sum(Data.fatalities).label("total_fatalities"), \
+            Data.country, func.avg(Data.latitude), func.avg(Data.longitude))\
+        .group_by(Data.country).filter(Data.year == 2022).all()
 
     session.close()
    
-    geojson = {
-        "type": "FeatureCollection",
-        "features": [
-        {
-            "type": "Feature",
+    geojson = [
+        [{
             "metadata": {
                 "url": "https://acleddata.com/curated-data-files/",
                 "title": "Anti-Civilian Violence, ACLED Data",
@@ -259,26 +255,57 @@ def globaldata():
                 },
             "geometry" : {
                 "type": "Point",
-                "coordinates": [str(longitude), str(latitude)],
+                "coordinates": [str(round(longitude,4)), str(round(latitude,4))],
                 },
             "properties" : {
-                "year": str(year),
-                "event_date": str(event_date),
-                "event_type": str(event_type),
-                "sub_event_type": str(sub_event_type),
-                "region": str(region),
-                "country": str(country),
-                "location": str(location),
-                "latitude": str(latitude),
-                "longitude": str(longitude),
                 "fatalities": str(fatalities),
-                "notes": notes,
-                "source": source
+                # "year": str(round(year,0)),
+                "country": str(country)
             },
-        } for year, event_date, event_type, sub_event_type, \
-        region, country, location, latitude, longitude, \
-        fatalities, notes, source in results]
-    }
+        }] for fatalities, country, latitude, longitude in results]
+
+
+    # #QUERY
+    # results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+    #     Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+    #     Data.fatalities, Data.notes, Data.source)\
+    #     .filter(Data.year == 2022).all()
+
+    # session.close()
+   
+    # geojson = {
+    #     "type": "FeatureCollection",
+    #     "features": [
+    #     {
+    #         "type": "Feature",
+    #         "metadata": {
+    #             "url": "https://acleddata.com/curated-data-files/",
+    #             "title": "Anti-Civilian Violence, ACLED Data",
+    #             "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+    #             "status": 200
+    #             },
+    #         "geometry" : {
+    #             "type": "Point",
+    #             "coordinates": [str(longitude), str(latitude)],
+    #             },
+    #         "properties" : {
+    #             "year": str(year),
+    #             "event_date": str(event_date),
+    #             "event_type": str(event_type),
+    #             "sub_event_type": str(sub_event_type),
+    #             "region": str(region),
+    #             "country": str(country),
+    #             "location": str(location),
+    #             "latitude": str(latitude),
+    #             "longitude": str(longitude),
+    #             "fatalities": str(fatalities),
+    #             "notes": notes,
+    #             "source": source
+    #         },
+    #     } for year, event_date, event_type, sub_event_type, \
+    #     region, country, location, latitude, longitude, \
+    #     fatalities, notes, source in results]
+    # }
     #return geojson
     return render_template('3_viz_global.html', geojson=geojson)
 
