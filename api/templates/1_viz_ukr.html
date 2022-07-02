@@ -33,6 +33,9 @@
     
         <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 ​
 
@@ -41,7 +44,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light-green" href="index.html">Anti-Civilian Violence</a>
+            <a class="navbar-brand text-light-green" href="index.html" style="color: rgb(253, 141, 66)">Anti-Civilian Violence</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -95,41 +98,66 @@
                     These are the results found in the analysis.
                     </p>
                 </div>
-
-                <div class="col-lg-6">
-
-                                <!-- MAP -->
-
-                                <div class="row">
-
-                                    <h1 class="dark:bg-primary dark:text-white">Visualisations</h1>
-
-                                    <div class="col-md-12">
-                                        <div class="card" style="width: 40rem;">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Ukraine: Violence Against Civilians Map Plot</h5>
-                                              <h6 class="card-subtitle mb-2 text-muted">Conflict locations & information</h6>
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                              <div id="my_map" style="width: 600px; height: 400px"></div>
-                                            </div>
-                                        </div>
-                                        <div class="card" style="width: 40rem;">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Ukraine: Fatality Count by Yeare</h5>
-                                              <h6 class="card-subtitle mb-2 text-muted">Fatalities by year</h6>
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                              <div id="bar" style="width: 600px; height: 400px"></div>
-                                            </div>
-                                        </div>
-                                        <div class="card" style="width: 40rem;">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
-                                              <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                              <div id="pie" style="width: 600px; height: 400px"></div>
-                                            </div>
+                <!-- MAP -->
+                <div class="col-md-12">
+                    <div class="card" style="width: 80rem; padding-top: 20px; padding-bottom: 20px;">
+                        <div class="card-body">
+                          <h5 class="card-title">Ukraine: Violence Against Civilians Map Plot</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Conflict locations & information</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <div id="my_map" style="width: 1200px; height: 600px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <br>
+            </section>
+                <div class="row">
+                        <h1 class="dark:bg-primary dark:text-white" style="width: 40rem; padding-top: 20px; padding-bottom: 20px;">Visualisations</h1>
+                        <section>
+                            <br>
+                        </section>
+                        <div class="col-6">
+                                <div class="card" style="width: 40rem; padding-top: 20px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ukraine: Fatality Count by Year</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">2018-2022</h6>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <div id="bar" style="width: 600px; height: 400px"></div>
                                     </div>
                                 </div>
+                        </div>
+                        <div class="col-6">
+                                <div class="card" style="width: 40rem; padding-top: 20px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <div id="pie" style="width: 600px; height: 400px"></div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-6">
+                                <div class="card" style="width: 40rem; padding-top: 20px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <div id="lines" style="width: 600px; height: 400px"></div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-6">
+                                <div class="card" style="width: 40rem; padding-top: 20px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <canvas id="myChart" width="400" height="400"></canvas>
+                                    </div>
+                                </div>
+                        </div>
                             </div>
                         </div>
                     </div>
@@ -206,8 +234,8 @@
         var markers = {
             opacity: 1,
             fillOpacity: 1,
-            fillColor: "red",
-            color: "red",
+            fillColor: "orange",
+            color: "orange",
             //radius: fatalities
             radius: 3,
             stroke: true,
@@ -235,36 +263,48 @@
 
 
         // Bar Plot 
+        // shan add in stacked bar chart here with event_id on top
+
         var featuresData = data["features"]
         var year = []
+        var event_date = []
         var fatalities = []
         var locations = []
         var subEventType = []
 
 
+
+
         for (i=0; i< featuresData.length; i++){
             year.push(featuresData[i]['properties']['year']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
+            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
+            event_date.push(parseInt(featuresData[i]['properties']['event_date']));      
         }
 
-        function plotCharts() {
 
-            varData = [
-                {
-                    x: year,
-                    y: fatalities,
-                    //text: ,
-                    type: "bar"
-                }
-            ];
+            var trace1 = {
+                x: year,
+                y: fatalities,
+                name: 'Fatalities',
+                type: "bar"
+            };
+
+            var trace2 = {
+                x: year,
+                y: event_date,
+                name: 'Events',
+                type: "bar"
+
+            };
+
+            varData = [trace1, trace2];
         
-            var barLayout = { title: "Fatalities over time: 2018-2022" };
+            var barLayout = { 
+                barmode: 'stack',
+                title: "Events & Fatalities over time: 2018-2022" };
             // plot
             Plotly.newPlot("bar", varData, barLayout);
 
-        };
-
-        plotCharts()
 
         // Pie Plot 
 
@@ -293,9 +333,77 @@
 
         piePlot()
 
-        // 
+        // line chart  
 
-    </script>
+        for (i=0; i< featuresData.length; i++){
+            event_date.push(featuresData[i]['properties']['event_date']); 
+        }
+
+        // var startDate = '2022-01-06 00:00:00'
+        // var endDate = '2022-06-09 00:00:00'
+
+        // var dates22 = []
+
+        // var loopThroughDateRange = (startDate, endDate) => {
+        //     let dateOne = new event_date(startDate);
+        //     let dateTwo = new event_date(endDate);
+        //         for(var i = dateOne; i<= dateTwo; i.setDate(i.getDate()+1)){
+        //             dates22.push([dates22]);
+        // }
+        // }
+
+            function plotLines() {
+
+                lineData = [
+                    {
+                        x: dates22,
+                        y: fatalities,
+                        //text: ,
+                        type: "lines"
+                    }
+                ];
+
+                var linesLayout = { title: "Conflict Fatalities in 2022" };
+                // plot
+                Plotly.newPlot("lines", lineData, lineLayout);
+
+                };
+
+                plotLines()
+        
+  
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+
+                // use orange 
+                type: 'bar',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{
+                            x: year,
+                            y: fatalities
+                    }],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+            });
+</script>
 
 </body>
 
