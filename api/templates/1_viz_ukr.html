@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en-us">
-​
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
         integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
         crossorigin=""></script>
-
 
     <!-- Marker cluster JavaScript code -->
     <script type="text/javascript"
@@ -37,7 +35,6 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-​
 
 <body>
 
@@ -86,16 +83,29 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg">
 
                     <h1 class="dark:bg-primary dark:text-white">Ukraine</h1>
                     <br>
                     <h5 class="text-light-green">Anti-Civilian Violence Data Analysis</h5>
 
-                    Ukraine is no stranger to conflict. Since ... 
-                    Then with the invasion of Ukraine by Russia on (date) Feb 2022, Ukraine was again at the forefront of world news stories.
-                    
-                    These are the results found in the analysis.
+                    The Ukraine and Russian conflict has deep routes. Since the .. then the 2014 Ukrainian revolution, the annexation of 
+                    Crimea, the war in Donbas, and many conflicts in between there has consistently been hostility between the two nations. 
+                    Then with the invasion of Ukraine by Russia on 24th February 2022 conflict escalated to a major war watched by the international
+                    community.
+                    <br>
+                    <br>
+                    One major and concerning aspect of the war is the increase in violence against civilians as a tactic and result of the conflict.
+                    Many human rights organisations, news outlets, and public bodies have highlighted the insenity of Russian violence against Ukrainian 
+                    civilians and also expressed concerns over the hidden nature of such violence and the implications for Ukraine and indeed, the world. 
+                    Violence against civilians is prohibited in conflict as cemented in international law. The atrocities, then, that have been and are 
+                    being committed against the civilians of Ukraine is a war crime. 
+                    <br>
+                    <br>
+                    We have visualised the filtered data from ACLEDs conflict dataset to highlight the increase in violence against civilians and 
+                    also seek to find any patterns and compare this data to regional and global data. Is violence against civilians a growing strategy 
+                    in modern conflicts?
+
                     </p>
                 </div>
                 <!-- MAP -->
@@ -123,7 +133,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Ukraine: Fatality Count by Year</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">2018-2022</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <p class="card-text"></p>
                                         <div id="bar" style="width: 600px; height: 400px"></div>
                                     </div>
                                 </div>
@@ -132,8 +142,8 @@
                                 <div class="card" style="width: 40rem; padding-top: 20px;">
                                     <div class="card-body">
                                         <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h6 class="card-subtitle mb-2 text-muted">Sub Events: Attack, Sexual Violence, and Abduction </h6>
+                                        <p class="card-text"></p>
                                         <div id="pie" style="width: 600px; height: 400px"></div>
                                     </div>
                                 </div>
@@ -263,7 +273,6 @@
 
 
         // Bar Plot 
-        // shan add in stacked bar chart here with event_id on top
 
         var featuresData = data["features"]
         var year = []
@@ -271,6 +280,8 @@
         var fatalities = []
         var locations = []
         var subEventType = []
+        var event_count = []
+        var location = []
 
 
 
@@ -278,7 +289,7 @@
         for (i=0; i< featuresData.length; i++){
             year.push(featuresData[i]['properties']['year']);
             fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
-            event_date.push(parseInt(featuresData[i]['properties']['event_date']));      
+            event_date.push(featuresData[i]['properties']['event_date']);      
         }
 
 
@@ -286,22 +297,24 @@
                 x: year,
                 y: fatalities,
                 name: 'Fatalities',
-                type: "bar"
-            };
+                type: "bar",
+                marker: {
+                    color: "orange"
+            }};
 
-            var trace2 = {
-                x: year,
-                y: event_date,
-                name: 'Events',
-                type: "bar"
+            // var trace2 = {
+            //     x: year,
+            //     y: ,
+            //     name: 'Events',
+            //     type: "line"
 
-            };
+            // };
 
-            varData = [trace1, trace2];
+            varData = [trace1];
         
             var barLayout = { 
-                barmode: 'stack',
-                title: "Events & Fatalities over time: 2018-2022" };
+                barmode: 'bar',
+                title: "Fatalities over time: 2018-2022" };
             // plot
             Plotly.newPlot("bar", varData, barLayout);
 
@@ -371,38 +384,45 @@
 
                 plotLines()
         
-  
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
+        // ANOTHER BAR :) 
 
-                // use orange 
-                type: 'bar',
-                data: {
-                    labels: ['2018', '2019', '2020', '2021', '2022'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [{
-                            x: year,
-                            y: fatalities
-                    }],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-            });
+        for (i=0; i< featuresData.length; i++){
+            year.push(featuresData[i]['properties']['year']);
+            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
+            event_date.push(featuresData[i]['properties']['event_date']); 
+            location.push(featuresData[i]['properties']['location']);
+        }
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+
+            // use orange 
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{
+                        x: location,
+                        y: fatalities
+                }],
+                    // backgroundColor: [
+                    //     'rgba(255, 99, 132, 0.2)',
+                    //     'rgba(54, 162, 235, 0.2)',
+                    //     'rgba(255, 206, 86, 0.2)',
+                    //     'rgba(75, 192, 192, 0.2)',
+                    //     'rgba(153, 102, 255, 0.2)'
+                    // ],
+                    // borderColor: [
+                    //     'rgba(255, 99, 132, 1)',
+                    //     'rgba(54, 162, 235, 1)',
+                    //     'rgba(255, 206, 86, 1)',
+                    //     'rgba(75, 192, 192, 1)',
+                    //     'rgba(153, 102, 255, 1)'
+                    // ]
+                }]
+            },
+        });
 </script>
 
 </body>
