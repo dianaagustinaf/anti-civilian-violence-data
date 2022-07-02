@@ -1,84 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+​
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparison</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Anti-Civilian Violence Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript"
+        src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+​
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-        <a class="navbar-brand text-light-green" href="index.html">Anti-Civilian Violence</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" 
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand text-light-orange" href="http://127.0.0.1:5000/">Anti-Civilian Violence</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="1_viz_ukr.html">Ukraine</a>
-                </li>
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/ukraine">Ukraine</a>
+                    </li>
 
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Regions
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li><a class="dropdown-item" href="2_viz_region1.html">Region 1</a></li>
-                    <li><a class="dropdown-item" href="2_viz_region2.html">Region 2</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Regional Data
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/datacled">Data</a>
+                    </li>
+
                 </ul>
-                </li>
-
-                <li class="nav-item">
-                <a class="nav-link active" href="3_viz_global.html">Global Data</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" href="../../data.html">Data</a>
-                </li>
-
-            </ul>
             </div>
         </div>
     </nav>
     <br>
 
-  <!-- SUMARY -->
-  <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
 
-                <div class="card mb-3">
-                    <img src="../assets/images/line.JPG" class="card-img-top" 
-                        alt="Correlation between Valence and Danceability">
-                    <div class="card-body">
-                      <h5 class="card-title">Correlation between Valence and Danceability</h5>
-                      <p class="card-text">
-                        So, we like dance songs but we also like sad songs? They don't correlate with each other?
-                        Well, I calculated the correlation between valence and danceability and 
-                        there is a positive correlation but it is moderate (0,52). 
-                        Also there is a noticeable group of songs that have high danceability but low valence.
-                      </p>
-                      <p class="card-text"><small class="text-muted"> 
-                          <a href="../index.html" class="text-light-green"> Home </a></small></p>
+                    <!-- SUMARY -->
+                    <h1 class="dark:bg-primary dark:text-white">Middle East</h1>
+                    <br>
+                    <p>
+                        Middle East is Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nobis dolore,
+                        exercitationem atque pariatur quod delectus quis quasi animi dolorem quia sunt ipsam culpa
+                        tempora fuga, consectetur eum, amet quas.
+                        Then with the invasion of Ukraine by Russia on (date) Feb 2022, Ukraine was again at the
+                        forefront of world news stories.
+
+                        These are the results found in the analysis.
+                    </p>
+
+                    <br>
+
+                    <!-- VIZ / MAP -->
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+                            <h3 class="card-title">Violence Against Civilians (2018-2022)</h3>
+                            <h4 class="card-subtitle mb-2 text-muted">Conflict locations & information</h4>
+                            
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa facere sed et ab laboriosam. Dolorem, asperiores? Praesentium repudiandae nihil ad modi laudantium harum hic commodi mollitia cupiditate, repellendus id cum.
+                                 Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                            </p>
+                            <br>
+                            <div id="my_map" style="width: 70vw; height: 70vh"></div>
+                        </div>
                     </div>
+
+                    <br>
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h3 class="card-title">Fatalities by Year</h3>
+                            <h4 class="card-subtitle mb-2 text-muted">2010 - 2022</h4>
+                            
+                            <p class="card-text">Some quick example text to build on the card title and make up the
+                                bulk of the card's content.</p>
+                            
+                            <br>
+                            <div id="bar" style="width: 70vw; height: 70vh"></div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h3 class="card-title">Fatalities % by Event Type</h3>
+                            <h4 class="card-subtitle mb-2 text-muted"> 2018 - 2022</h4>
+                            
+                            <p class="card-text">Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque exercitationem totam deleniti maiores. Eaque tenetur quae, deserunt et quia modi quasi adipisci possimus corporis, in assumenda quisquam fuga libero totam.
+                            </p>
+                            
+                            <br>
+                            <div id="pie" style="width: 70vw; height: 70vh"></div>
+
+                        </div>
+                    </div>
+
+                <h5>Data Source: ACLED ----  LINK </h5>
                 </div>
-            </div> 
+            </div>
         </div>
-    </div>       
-  </section>
+    </section>
 
-  ​
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+        var data = {{ geojson| tojson}};
+    </script>
 
-    
+    <script src="/static/js/2_viz_region2.js"></script>
+
+    ​
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+
 </body>
+
 </html>

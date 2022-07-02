@@ -41,18 +41,18 @@ def welcome():
     
     txt = "List all available api routes"
 
-    txt1 ="http://127.0.0.1:5000/api/v1.0/ukraine"
-    txt2 ="http://127.0.0.1:5000/api/v1.0/region1"
-    txt3 ="http://127.0.0.1:5000/api/v1.0/region2"
-    txt4 ="http://127.0.0.1:5000/api/v1.0/globaldata"
-    txt5 ="http://127.0.0.1:5000/api/v1.0/datacled"
+    ukr ="http://127.0.0.1:5000/api/v1.0/ukraine"
+    reg1 ="http://127.0.0.1:5000/api/v1.0/region1"
+    reg2 ="http://127.0.0.1:5000/api/v1.0/region2"
+    glo ="http://127.0.0.1:5000/api/v1.0/globaldata"
+    dat ="http://127.0.0.1:5000/api/v1.0/datacled"
     
     listurl = []
-    listurl.append(txt1)
-    listurl.append(txt2)
-    listurl.append(txt3)
-    listurl.append(txt4)
-    listurl.append(txt5)
+    listurl.append(ukr)
+    listurl.append(reg1)
+    listurl.append(reg2)
+    listurl.append(glo)
+    listurl.append(dat)
 
     return render_template("index.html", txt=txt, listurl=listurl)
 
@@ -109,11 +109,129 @@ def ukraine():
     #return geojson
     return render_template('1_viz_ukr.html', geojson=geojson)
 
-    ## this send the data to he html
-    ## make the script / d3 inside the html???
+
+########################################################################
+# REGIONS   =   
+# Southeast Asia  /  South Asia  /  Caucasus and Central Asia
+# South America  /  Central America  /  North America  /  Caribbean
+# Middle East  /  Europe  /  
+# Eastern Africa  /  Western Africa  /  Southern Africa  /  Northern Africa
+
+
+@app.route("/api/v1.0/region1")
+def region1():
+
+    session = Session(engine)
+
+    # #QUERY
+    # results = session.query(Data.year, func.sum(Data.fatalities).label("total_fatalities"))\
+    #     .group_by(Data.country and Data.year).filter(Data.country == "Ukraine").all()
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.region == "Europe").all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+    #print(geojson)
+    #return geojson
+    return render_template('2_viz_region1.html', geojson=geojson)
 
 
 ########################################################################
+
+@app.route("/api/v1.0/region2")
+def region2():
+
+    session = Session(engine)
+
+    # #QUERY
+    # results = session.query(Data.year, func.sum(Data.fatalities).label("total_fatalities"))\
+    #     .group_by(Data.country and Data.year).filter(Data.country == "Ukraine").all()
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.region == "Middle East").all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+    #print(geojson)
+    #return geojson
+    return render_template('2_viz_region2.html', geojson=geojson)
+
+
+########################################################################
+
 
 @app.route("/api/v1.0/globaldata")
 def globaldata():
@@ -193,8 +311,37 @@ if __name__ == '__main__':
 
 
 
+############################################
+# filter + group query
 
+# @app.route("/api/v1.0/region1")
+# def region1():
 
+#     session = Session(engine)
+
+#     #QUERY
+#     results = session.query(Data.year, func.sum(Data.fatalities).label("total_fatalities"))\
+#         .group_by(Data.country and Data.year).filter(Data.country == "Ukraine").all()
+
+#     session.close()
+   
+#     geojson = [
+#         [{
+#             "metadata": {
+#                 "url": "https://acleddata.com/curated-data-files/",
+#                 "title": "Anti-Civilian Violence, ACLED Data",
+#                 "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+#                 "status": 200
+#                 },
+#             "properties" : {
+#                 "year": str(year),
+#                 "fatalities": str(fatalities)
+#             },
+#         }] for year, fatalities in results]
+
+#     #print(geojson)
+#     #return geojson
+#     return render_template('2_viz_region1.html', geojson=geojson)
 
 
 ############################################
@@ -218,32 +365,3 @@ if __name__ == '__main__':
     #     all_properties.append(event_dict)
 
     #return jsonify(all_properties)
-
-
-# @app.route("/api/v1.0/ukrevents")
-# def ukrevents():
-
-#     session = Session(engine)
-
-#     """Return ukraine data"""
-#     #results = session.query(Data.country).all()
- 
-#     results = session.query(Data.index, Data.year, Data.country, Data.latitude, Data.longitude)\
-#         .filter(Data.country == "Ukraine").all()
-
-#     session.close()
-
-#     #all_names = list(np.ravel(results))
-
-#     all_events = []
-
-#     for index, year, country, latitude, longitude in results:
-#         event_dict = {}
-#         event_dict["index"] = str(index)
-#         event_dict["year"] = str(year)
-#         event_dict["country"] = str(country)
-#         event_dict["latitude"] = str(latitude)
-#         event_dict["longitude"] = str(longitude)
-#         all_events.append(event_dict)
-
-#     return jsonify(all_events)
