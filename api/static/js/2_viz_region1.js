@@ -95,18 +95,59 @@ for (i=0; i< featuresData.length; i++){
     subEventType.push(featuresData[i]['properties']['sub_event_type']);          
 }
 
+yearlist = [2018,2019,2020,2021,2022]
+
+function sumFatalities(yearraw, fatalitiesraw) {
+
+    let fatalitieslist = [0,0,0,0,0]
+
+    for (let i = 0; i < yearraw.length; i++) {
+        const year = yearraw[i];
+        const fatality = fatalitiesraw[i];
+
+        if (year == 2018) {
+            fatalitieslist[0] = fatalitieslist[0] + fatality       
+        } else if (year == 2019) {
+            fatalitieslist[1] = fatalitieslist[1] + fatality
+        } else if (year == 2020) {
+            fatalitieslist[2] = fatalitieslist[2] + fatality
+        } else if (year == 2021) {
+            fatalitieslist[3] = fatalitieslist[3] + fatality
+        } else if (year == 2022) {
+            fatalitieslist[4] = fatalitieslist[4] + fatality
+        }
+    }
+    console.log(fatalitieslist);
+    return fatalitieslist;
+}
+
+let fatalitiessumlist = sumFatalities(year,fatalities);
+
 function barPlot() {
 
     varData = [
         {
-            x: year,
-            y: fatalities,
-            //text: ,
-            type: "bar"
+            x: yearlist,
+            y: fatalitiessumlist,
+            text: fatalitiessumlist.map(String),
+            textposition: 'auto',
+            hoverinfo: 'none',
+            type: "bar",
+            marker: {
+                color: 'orange',
+                opacity: 0.9,
+                line: {
+                  color: 'black',
+                  width: 1.5
+                }
+            }
         }
     ];
 
-    var barLayout = { title: "Fatalities over time: 2018-2022" };
+    var barLayout = { 
+        title: "Civilian Fatalities Over Time: 2018-2022",
+        barmode: 'stack'
+    };
     // plot
     Plotly.newPlot("bar", varData, barLayout);
 
@@ -114,12 +155,7 @@ function barPlot() {
 
 barPlot()
 
-// Pie Plot 
-
-// for (i=0; i< featuresData.length; i++){
-//     subEventType.push(featuresData[i]['properties']['sub_event_type']);
-//     fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
-// }
+/////////////////////////////////////////////////////// Pie Plot 
 
 function piePlot() {
 
