@@ -32,8 +32,8 @@
         <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body>
@@ -114,7 +114,7 @@
                         <div class="card-body">
                           <h5 class="card-title">Ukraine: Violence Against Civilians Map Plot</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Conflict locations & information</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <p class="card-text"></p>
                           <div id="my_map" style="width: 1200px; height: 600px"></div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                         <div class="col-6">
                                 <div class="card" style="width: 40rem; padding-top: 20px;">
                                     <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
+                                        <h5 class="card-title">Ukraine: Fatality Count</h5>
                                         <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         <div id="lines" style="width: 600px; height: 400px"></div>
@@ -164,7 +164,7 @@
                                         <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
                                         <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <canvas id="myChart" width="400" height="400"></canvas>
+                                        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
                                     </div>
                                 </div>
                         </div>
@@ -173,8 +173,6 @@
                     </div>
                 </div>
     </section>
-
-    ​
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
@@ -288,8 +286,7 @@
 
         for (i=0; i< featuresData.length; i++){
             year.push(featuresData[i]['properties']['year']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
-            event_date.push(featuresData[i]['properties']['event_date']);      
+            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));      
         }
 
 
@@ -386,26 +383,26 @@
         
         // ANOTHER BAR :) 
 
-        for (i=0; i< featuresData.length; i++){
-            year.push(featuresData[i]['properties']['year']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
-            event_date.push(featuresData[i]['properties']['event_date']); 
-            location.push(featuresData[i]['properties']['location']);
-        }
+        // for (i=0; i< featuresData.length; i++){
+        //     year.push(featuresData[i]['properties']['year']);
+        //     fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
+        //     event_date.push(featuresData[i]['properties']['event_date']); 
+        //     location.push(featuresData[i]['properties']['location']);
+        // }
 
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
+        // const ctx = document.getElementById('myChart').getContext('2d');
+        // const myChart = new Chart(ctx, {
 
-            // use orange 
-            type: 'line',
-            data: {
-                labels: ['2018', '2019', '2020', '2021', '2022'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [{
-                        x: location,
-                        y: fatalities
-                }],
+        //     // use orange 
+        //     type: 'line',
+        //     data: {
+        //         labels: ['2018', '2019', '2020', '2021', '2022'],
+        //         datasets: [{
+        //             label: '# of Votes',
+        //             data: [{
+        //                 x: location,
+        //                 y: fatalities
+        //         }],
                     // backgroundColor: [
                     //     'rgba(255, 99, 132, 0.2)',
                     //     'rgba(54, 162, 235, 0.2)',
@@ -419,10 +416,10 @@
                     //     'rgba(255, 206, 86, 1)',
                     //     'rgba(75, 192, 192, 1)',
                     //     'rgba(153, 102, 255, 1)'
-                    // ]
-                }]
-            },
-        });
+        //             // ]
+        //         }]
+        //     },
+        // });
 </script>
 
 </body>
