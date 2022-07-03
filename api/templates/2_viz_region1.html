@@ -8,6 +8,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
@@ -104,6 +105,9 @@
                     <br>
 
                     <!-- VIZ / MAP -->
+
+                    <!-- MAP -->
+
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
                         <div class="col">
@@ -119,14 +123,15 @@
                         </div>
                     </div>
 
-                    <br>
+                    <br> 
+                    <!-- BAR -->
 
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
                         <div class="col">
 
                             <h3 class="card-title">Fatalities by Year</h3>
-                            <h4 class="card-subtitle mb-2 text-muted">2010 - 2022</h4>
+                            <h4 class="card-subtitle mb-2 text-muted">2018 - 2022</h4>
                             
                             <p class="card-text">Some quick example text to build on the card title and make up the
                                 bulk of the card's content.</p>
@@ -135,8 +140,9 @@
                             <div id="bar" style="width: 70vw; height: 70vh"></div>
                         </div>
                     </div>
-
+ 
                     <br>
+                    <!-- PIE -->
 
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
@@ -156,11 +162,18 @@
                         </div>
                     </div>
 
-                <h5>Data Source: ACLED ----  LINK </h5>
+
                 </div>
             </div>
         </div>
     </section>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div>
+            <h6>Data Source: <a href="https://acleddata.com/curated-data-files/" 
+                target="_blank" rel="noopener noreferrer">ACLED</a></h6>
+        </div>
+    </footer>
 
     <script>
         var data = {{ geojson| tojson}};

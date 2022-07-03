@@ -1,12 +1,19 @@
 
 .text-light-orange{
-    color: rgb(253, 141, 66);
+    color: orange;
 }
 
 .data-table{
     border: 1px;
     box-sizing: border-box;
     border-color: black;
+}
+
+/* body { padding-top: 70px; } */
+
+p {
+    align-content: center;
+    font-size: larger;
 }
 
 /* #my_map { height: calc(100% - 44px); width: 100%; position: absolute !important; } */
@@ -20,11 +27,6 @@
     padding: 10%;
 } */
 
-p {
-    align-content: center;
-    font-size: larger;
-}
-
 /*
 
 h1 {
@@ -34,9 +36,3 @@ h1 {
 }
 */
 
-
-/*
-body{
-    background-color: rgb(1, 1, 20);
-}
-*/

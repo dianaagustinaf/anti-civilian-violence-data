@@ -226,6 +226,111 @@ def region2():
     return render_template('2_viz_region2.html', geojson=geojson)
 
 
+
+########################################################################
+
+@app.route("/api/v1.0/region3")
+def region3():
+
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.region == "North America").all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+    return render_template('2_viz_region3.html', geojson=geojson)
+
+
+
+########################################################################
+
+@app.route("/api/v1.0/region4")
+def region4():
+
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
+        Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
+        Data.fatalities, Data.notes, Data.source)\
+        .filter(Data.region == "South America" or Data.region == "Central America" or Data.region == "Caribbean")\
+        .all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(longitude), str(latitude)],
+                },
+            "properties" : {
+                "year": str(year),
+                "event_date": str(event_date),
+                "event_type": str(event_type),
+                "sub_event_type": str(sub_event_type),
+                "region": str(region),
+                "country": str(country),
+                "location": str(location),
+                "latitude": str(latitude),
+                "longitude": str(longitude),
+                "fatalities": str(fatalities),
+                "notes": notes,
+                "source": source
+            },
+        } for year, event_date, event_type, sub_event_type, \
+        region, country, location, latitude, longitude, \
+        fatalities, notes, source in results]
+    }
+    return render_template('2_viz_region4.html', geojson=geojson)
+
+
 ########################################################################
 
 
