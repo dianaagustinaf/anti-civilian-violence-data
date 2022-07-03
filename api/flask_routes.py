@@ -45,6 +45,8 @@ def welcome():
     reg1 ="http://127.0.0.1:5000/api/v1.0/region1"
     reg2 ="http://127.0.0.1:5000/api/v1.0/region2"
     glo ="http://127.0.0.1:5000/api/v1.0/globaldata"
+    glomap ="http://127.0.0.1:5000/api/v1.0/globalmap"
+    globall ="http://127.0.0.1:5000/api/v1.0/globalall"
     dat ="http://127.0.0.1:5000/api/v1.0/datacled"
     
     listurl = []
@@ -52,6 +54,8 @@ def welcome():
     listurl.append(reg1)
     listurl.append(reg2)
     listurl.append(glo)
+    listurl.append(glomap)
+    listurl.append(globall)
     listurl.append(dat)
 
     return render_template("index.html", txt=txt, listurl=listurl)
@@ -261,9 +265,84 @@ def globaldata():
 
     return render_template('3_viz_global.html', geojson=geojson)
 
+########################################################################
 
 
+@app.route("/api/v1.0/globalmap")
+def globalmap():
 
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(func.sum(Data.fatalities).label("total_fatalities"), \
+            Data.country, func.avg(Data.latitude), func.avg(Data.longitude))\
+        .group_by(Data.country).filter(Data.year == 2022).all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(round(longitude,4)), str(round(latitude,4))],
+                },
+            "properties" : {
+                "fatalities": str(fatalities),
+                "country": str(country)
+            },
+        } for fatalities, country, latitude, longitude in results]
+    }
+
+    return render_template('3_map_global.html', geojson=geojson)
+
+
+########################################################################
+
+
+@app.route("/api/v1.0/globalall")
+def globalall():
+
+    session = Session(engine)
+
+    #QUERY
+    results = session.query(func.sum(Data.fatalities).label("total_fatalities"), \
+            Data.country, func.avg(Data.latitude), func.avg(Data.longitude))\
+        .group_by(Data.country).filter(Data.year > 2018).all()
+
+    session.close()
+   
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+        {
+            "type": "Feature",
+            "metadata": {
+                "url": "https://acleddata.com/curated-data-files/",
+                "title": "Anti-Civilian Violence, ACLED Data",
+                "subtitle": "Analysis and visualisation by Shannon, Diana & Shola for University of Birmingham", 
+                "status": 200
+                },
+            "geometry" : {
+                "type": "Point",
+                "coordinates": [str(round(longitude,4)), str(round(latitude,4))],
+                },
+            "properties" : {
+                "fatalities": str(fatalities),
+                "country": str(country)
+            },
+        } for fatalities, country, latitude, longitude in results]
+    }
+
+    return render_template('3_overview_global.html', geojson=geojson)
 
 ############################
 # DATA
