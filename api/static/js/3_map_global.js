@@ -1,7 +1,7 @@
 console.log(data);
 
 // Setup map variable and view point
-var myMap = L.map("map", {
+var myMap = L.map("my_map", {
     center: [49.05, 33.22],
     zoom: 2, 
 

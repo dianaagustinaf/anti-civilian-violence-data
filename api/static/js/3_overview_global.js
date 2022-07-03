@@ -106,7 +106,7 @@ am5.ready(function() {
     }, {
       region: "2018",
       area: "Total 2018",
-      fatalities: 28352
+      fatalities: 29564
     }, {
       region: "2019",
       area: "  Caribbean",
@@ -170,7 +170,7 @@ am5.ready(function() {
     }, {
       region: "2019",
       area: "Total 2019",
-      fatalities: 29863
+      fatalities: 28352
     }, {
       region: "2020",
       area: "Caribbean",
@@ -234,7 +234,7 @@ am5.ready(function() {
     }, {
       region: "2020",
       area: "Total 2020",
-      fatalities: 33320
+      fatalities: 29863
     },{
       region: "2021",
       area: " Caribbean ",
@@ -302,7 +302,7 @@ am5.ready(function() {
     },{
       region: "2021",
       area: "Total 2021",
-      fatalities: 17360
+      fatalities: 33320
     }, {
       region: "2022",
       area: "  Caribbean ",

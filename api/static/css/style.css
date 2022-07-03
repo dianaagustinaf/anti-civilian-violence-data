@@ -25,6 +25,30 @@ p {
     font-size: larger;
 }
 
+body {
+    margin: 20px auto;
+    font-family: 'Lato';
+    font-weight: 300;
+    text-align: center;
+  }
+  
+#pie-chart {
+    margin: 0 auto;
+    height: 450px;
+  }
+
+/* map */
+
+/* #map{
+    position: absolute;
+    height:1000px;
+    width: 100%;
+    border-radius: 10px;
+    top: 105px;
+    left: 0;
+} */
+
+
 /*
 
 h1 {
