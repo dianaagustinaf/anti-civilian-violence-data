@@ -24,7 +24,7 @@ For visualisations we used Javascript packages `plotly`, `leaflet` and `amCharts
 ## Analysis 
 We found some interesting... 
 
-## Finally.. How to Run this Project
+## Finally... How to Run this Project
 
 ```python
 import pandas as pd
