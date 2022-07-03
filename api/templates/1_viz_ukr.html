@@ -7,7 +7,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
@@ -32,8 +32,6 @@
         <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <!-- Chart.js
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body>
@@ -89,7 +87,7 @@
                     <br>
                     <h5 class="text-light-green">Anti-Civilian Violence Data Analysis</h5>
 
-                    The Ukraine and Russian conflict has deep routes. Since the .. then the 2014 Ukrainian revolution, the annexation of 
+                    The Ukraine and Russian conflict has deep routes. Since the 2014 Ukrainian revolution, the annexation of 
                     Crimea, the war in Donbas, and many conflicts in between there has consistently been hostility between the two nations. 
                     Then with the invasion of Ukraine by Russia on 24th February 2022 conflict escalated to a major war watched by the international
                     community.
@@ -133,7 +131,9 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Ukraine: Fatality Count by Year</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">2018-2022</h6>
-                                        <p class="card-text"></p>
+                                        <p class="card-text">The incidences and fatality count of violence against civilians has increased since 2018. 
+                                            This directly correlates with the Russian invasion of Ukraine.
+                                        </p>
                                         <div id="bar" style="width: 600px; height: 400px"></div>
                                     </div>
                                 </div>
@@ -143,101 +143,59 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">Sub Events: Attack, Sexual Violence, and Abduction </h6>
-                                        <p class="card-text"></p>
+                                        <p class="card-text">Attacks are the highest proportion of sub-event types. This correlates with reports on 
+                                            the hidden nature of sexual violence and abduction. 
+                                        </p>
                                         <div id="pie" style="width: 600px; height: 400px"></div>
                                     </div>
                                 </div>
                         </div>
                         <div class="col-6">
-                                <div class="card" style="width: 40rem; padding-top: 20px;">
+                                <div class="card" style="width: 81rem; padding-top: 20px; padding-bottom: 20px;">
                                     <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Count</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <div id="lines" style="width: 600px; height: 400px"></div>
+                                        <h5 class="card-title">Ukraine: Fatality Over Time</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"> Line Plot 2018-2022</h6>
+                                        <p class="card-text"></p>
+                                        <div id="lines" style="width: 1200px; height: 600px"></div>
                                     </div>
                                 </div>
                         </div>
-                        <div class="col-6">
+                        <!-- <div class="col-6">
                                 <div class="card" style="width: 40rem; padding-top: 20px;">
                                     <div class="card-body">
                                         <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
                                         <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
                                     </div>
                                 </div>
-                        </div>
+                        </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
     </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 
     <!-- <script> var data = {{ geojson|safe }} </script> -->
 
     <!-- <script src="/static/js/1_viz_ukr.js"></script> -->
+    
     <script>
         var data = {{ geojson|safe }};
-        // create map
-        // var layers = {
-        //     2018: new L.LayerGroup(),
-        //     2019: new L.LayerGroup(),
-        //     2020: new L.LayerGroup(),
-        //     2021: new L.LayerGroup(),
-        //     2022: new L.LayerGroup(),
-        // };
-
-        // var overlays = {
-        //     "2018": layers.2018,
-        //     "2019": layers.2019, 
-        //     "2020": layers.2020,
-        //     "2021": layers.2021,
-        //     "2022": layers.2022
-            
-        // }
+      
         var myMap = L.map("my_map", {
             center: [49.05, 33.22],
             zoom: 6, 
-            // layers: [
-            //     layers.2018, 
-            //     layers.2019, 
-            //     layers.2020,
-            //     layers.2021,
-            //     layers.2022
-            // ]
         });
 
         // Add tile layer 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(myMap);
-
-        // L.control.layers(null, overlays).addTo(myMap);
-
-        // // Legend to display information about map
-        // var info = L.control({
-        //     position: "bottomright"
-        // });
-
-        // info.onAdd = function() {
-        // var div = L.DomUtil.create("div", "legend");
-        // return div;
-        // };
-        // // Add the info legend to the map.
-        // info.addTo(myMap);
-
-
-
-        // loop over geojson to find radius size 
-    //    var fatalities = []
-        
-    //     for (i=0; i< featuresData.length; i++){
-    //         fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
-    //     }
 
         var markers = {
             opacity: 1,
@@ -261,11 +219,7 @@
                     + "<br>Sub-Event Type: " + feature.properties.sub_event_type
                     + "<br>Fatalities: " + feature.properties.fatalities
                     + "<br>Notes: " + feature.properties.notes)
-                // layer.on({
-                // mouseover: highlightFeature,
-                // mouseout: resetHighlight,
-                // click: zoomToFeature
-                // });
+           
             }
         }).addTo(myMap);
 
@@ -274,152 +228,85 @@
 
         var featuresData = data["features"]
         var year = []
-        var event_date = []
         var fatalities = []
-        var locations = []
         var subEventType = []
-        var event_count = []
-        var location = []
+        var event_date = []
 
 
+        console.log(featuresData.length)
 
 
-        for (i=0; i< featuresData.length; i++){
+        for (i=0; i<featuresData.length; i++){
             year.push(featuresData[i]['properties']['year']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));      
+            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
+            subEventType.push(featuresData[i]['properties']['sub_event_type']);
+            event_date.push(featuresData[i]['properties']['event_date']);      
         }
 
 
-            var trace1 = {
-                x: year,
-                y: fatalities,
-                name: 'Fatalities',
-                type: "bar",
-                marker: {
-                    color: "orange"
-            }};
 
-            // var trace2 = {
-            //     x: year,
-            //     y: ,
-            //     name: 'Events',
-            //     type: "line"
+        var trace1 = {
+            x: year,
+            y: fatalities,
+            name: 'Fatalities',
+            type: "bar",
+            marker: {
+                color: "orange"
+        }};
 
-            // };
 
-            varData = [trace1];
-        
-            var barLayout = { 
-                barmode: 'bar',
-                title: "Fatalities over time: 2018-2022" };
-            // plot
-            Plotly.newPlot("bar", varData, barLayout);
+        varData = [trace1];
+    
+        var barLayout = { 
+            barmode: 'bar',
+            title: "Fatalities over time: 2018-2022" };
+        // plot
+        Plotly.newPlot("bar", varData, barLayout);
+
 
 
         // Pie Plot 
 
-        for (i=0; i< featuresData.length; i++){
-            subEventType.push(featuresData[i]['properties']['sub_event_type']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
-        }
-
         function piePlot() {
 
-        pieData = [
-            {
-                values: fatalities,
-                labels: subEventType,
-                type: "pie",
-                insidetextorientation: "radial"
-            }
-        ];
+            pieData = [
+                {
+                    values: fatalities,
+                    labels: subEventType,
+                    type: "pie",
+                    insidetextorientation: "radial"
+                }
+            ];
 
-        var pieLayout = { 
-            title: "Fatalities by Sub Event Type"};
-        // plot
-        Plotly.newPlot("pie", pieData, pieLayout);
+            var pieLayout = { 
+                title: "Fatalities by Sub Event Type"};
+            // plot
+            Plotly.newPlot("pie", pieData, pieLayout);
 
-        };
+            };
 
         piePlot()
 
-        // line chart  
 
-        for (i=0; i< featuresData.length; i++){
-            event_date.push(featuresData[i]['properties']['event_date']); 
-        }
+        function plotLines() {
 
-        // var startDate = '2022-01-06 00:00:00'
-        // var endDate = '2022-06-09 00:00:00'
+            lineData = [
+                {
+                    x:event_date,       
+                    y: fatalities,
+                    //text: ,
+                    mode: "Lines"
+                }
+            ];
 
-        // var dates22 = []
+            var linesLayout = { title: "Conflict Fatalities in 2022" };
+            // plot
+            Plotly.newPlot("lines", lineData, lineLayout);
 
-        // var loopThroughDateRange = (startDate, endDate) => {
-        //     let dateOne = new event_date(startDate);
-        //     let dateTwo = new event_date(endDate);
-        //         for(var i = dateOne; i<= dateTwo; i.setDate(i.getDate()+1)){
-        //             dates22.push([dates22]);
-        // }
-        // }
+            };
 
-            function plotLines() {
+        plotLines()
 
-                lineData = [
-                    {
-                        x: dates22,
-                        y: fatalities,
-                        //text: ,
-                        type: "lines"
-                    }
-                ];
-
-                var linesLayout = { title: "Conflict Fatalities in 2022" };
-                // plot
-                Plotly.newPlot("lines", lineData, lineLayout);
-
-                };
-
-                plotLines()
-        
-        // ANOTHER BAR :) 
-
-        // for (i=0; i< featuresData.length; i++){
-        //     year.push(featuresData[i]['properties']['year']);
-        //     fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
-        //     event_date.push(featuresData[i]['properties']['event_date']); 
-        //     location.push(featuresData[i]['properties']['location']);
-        // }
-
-        // const ctx = document.getElementById('myChart').getContext('2d');
-        // const myChart = new Chart(ctx, {
-
-        //     // use orange 
-        //     type: 'line',
-        //     data: {
-        //         labels: ['2018', '2019', '2020', '2021', '2022'],
-        //         datasets: [{
-        //             label: '# of Votes',
-        //             data: [{
-        //                 x: location,
-        //                 y: fatalities
-        //         }],
-                    // backgroundColor: [
-                    //     'rgba(255, 99, 132, 0.2)',
-                    //     'rgba(54, 162, 235, 0.2)',
-                    //     'rgba(255, 206, 86, 0.2)',
-                    //     'rgba(75, 192, 192, 0.2)',
-                    //     'rgba(153, 102, 255, 0.2)'
-                    // ],
-                    // borderColor: [
-                    //     'rgba(255, 99, 132, 1)',
-                    //     'rgba(54, 162, 235, 1)',
-                    //     'rgba(255, 206, 86, 1)',
-                    //     'rgba(75, 192, 192, 1)',
-                    //     'rgba(153, 102, 255, 1)'
-        //             // ]
-        //         }]
-        //     },
-        // });
 </script>
 
 </body>

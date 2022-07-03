@@ -1,5 +1,5 @@
 
-.text-light-green{
+.text-light-orange{
     color: rgb(253, 141, 66);
 }
 
@@ -8,6 +8,9 @@
     box-sizing: border-box;
     border-color: black;
 }
+
+/* #my_map { height: calc(100% - 44px); width: 100%; position: absolute !important; } */
+
 
 /* img {
     margin-left: auto;
