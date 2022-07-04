@@ -1,7 +1,7 @@
 # Anti-Civilian Violence Data Analysis
 ## Data Analysis and Visualisation of ACLED Dataset
 
-![image](https://user-images.githubusercontent.com/100214297/176996848-e6aa643e-7ed5-45c4-9fc3-13ba04dac9b0.png)
+https://user-images.githubusercontent.com/96545188/177221049-95147799-8915-4e25-bcf0-cdd69dfbc7f4.mp4
 
 The war in Ukarine has been at the forefront of global news for the past few months. Many news outlets have claimed that human righst abuses have been occuring in the form of violence against civillians. 
 
