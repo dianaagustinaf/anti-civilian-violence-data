@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en-us">
+​
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Anti-Civilian Violence Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript"
+        src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+​
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light-orange" href="http://127.0.0.1:5000/">Anti-Civilian Violence</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/ukraine">Ukraine</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Regional Data
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/datacled">Data</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <br>
+    </section>
+
+    <!-- CONTENT -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- SUMARY -->
+                    <h1 class="dark:bg-primary dark:text-white">South America</h1>
+                    <br>
+                    <p>
+                        Europe is Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nobis dolore,
+                        exercitationem atque pariatur quod delectus quis quasi animi dolorem quia sunt ipsam culpa
+                        tempora fuga, consectetur eum, amet quas.
+                        Then with the invasion of Ukraine by Russia on (date) Feb 2022, Ukraine was again at the
+                        forefront of world news stories.
+
+                        These are the results found in the analysis.
+                    </p>
+
+                    <br>
+
+                    <!-- VIZ / MAP -->
+
+                    <!-- MAP -->
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+                            <h3 class="card-title">Violence Against Civilians (2018-2022)</h3>
+                            <h4 class="card-subtitle mb-2 text-muted">Conflict locations & information</h4>
+                            
+                            <p class="card-text">
+                                Each dot on the map is an attack on civilians. 
+                                The size of the circles is defined by the number of victims killed in the attack.  
+                            </p>
+                            <br>
+                            <div id="my_map" style="width: 90vw; height: 80vh"></div>
+                            <br>
+                        </div>
+                    </div>
+
+                    <br> 
+                    <!-- BAR -->
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h3 class="card-title">Fatalities by Year</h3>
+                            <h4 class="card-subtitle mb-2 text-muted">2018 - 2022</h4>
+                            
+                            <p class="card-text">
+                                In 2020 and 2021 the number of cases has decreased slightly, 
+                                and by 2022 a similar number of cases can be projected 
+                                (Please note that data for 2022 is as of 10 June).
+                                The largest number of cases, as can be seen in the map, are in Mexico.
+                                </p>
+                            
+                            <br>
+                            <div id="bar" style="width: 90vw; height: 70vh"></div>
+                        </div>
+                    </div>
+ 
+                    <br>
+                    <!-- PIE -->
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h3 class="card-title">Fatalities % by Event Type</h3>
+                            <h4 class="card-subtitle mb-2 text-muted"> 2018 - 2022</h4>
+                            
+                            <p class="card-text">
+                                Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                            </p>
+                            
+                            <br>
+                            <div id="pie" style="width: 90vw; height: 70vh"></div>
+
+                        </div>
+                    </div>
+
+                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                        <div>
+                            <h6>Data Source: <a href="https://acleddata.com/curated-data-files/" 
+                                target="_blank" rel="noopener noreferrer">
+                                ACLED</a> - Anti-Civilian Violence Dataset (10 June 2022) </h6>
+                        </div>
+                    </footer>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        var data = {{ geojson| tojson}};
+    </script>
+
+    <script src="/static/js/2_viz_region4.js"></script>
+
+    ​
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

@@ -294,9 +294,10 @@ def region4():
     results = session.query(Data.year, Data.event_date, Data.event_type, Data.sub_event_type, \
         Data.region, Data.country, Data.location, Data.latitude, Data.longitude, \
         Data.fatalities, Data.notes, Data.source)\
-        .filter(Data.region == "South America" or Data.region == "Central America" or Data.region == "Caribbean")\
+        .filter(Data.region == "South America")\
         .all()
 
+    # or Data.region == "Central America" or Data.region == "Caribbean"
     session.close()
    
     geojson = {
