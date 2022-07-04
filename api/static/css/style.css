@@ -22,12 +22,13 @@ p {
 /* #my_map { height: calc(100% - 44px); width: 100%; position: absolute !important; } */
 
 
-/* img {
+.imgvis {
+
     margin-left: auto;
     margin-right: auto;
     display: block;
     box-shadow: 3px 3px 3px rgb(29, 28, 28);
     padding: 10%;
-} */
+} 
 
 /*

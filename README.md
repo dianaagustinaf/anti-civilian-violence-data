@@ -36,6 +36,6 @@ from pg_keys import pg_key
 ```python
 pg_keys.py
 
-pg_key-"YOUR_SQL_PASSWORD"
+pg_key="YOUR_SQL_PASSWORD"
 ```
 
