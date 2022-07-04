@@ -9,6 +9,10 @@
     border-color: black;
 } */
 
+#pie-chart {
+    margin: 0 auto;
+    height: 450px;
+  }
 
 p {
     align-content: center;
