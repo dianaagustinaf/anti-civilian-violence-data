@@ -7,7 +7,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
@@ -28,20 +28,18 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
     <link rel="stylesheet" type="text/css"
         href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-    
-        <!-- Plotly -->
+
+    <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <!-- Chart.js
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body>
-
+    <br>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light-green" href="index.html" style="color: rgb(253, 141, 66)">Anti-Civilian Violence</a>
+            <a class="navbar-brand text-light-orange" href="http://127.0.0.1:5000/">Anti-Civilian Violence</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -49,24 +47,40 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/ukraine">Ukraine</a>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Plots
+                            Regional Data
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="visualizations/1_viz.html">Ukraine</a></li>
-                            <li><a class="dropdown-item" href="visualizations/2_viz.html">Regional Data</a></li>
-                            <li><a class="dropdown-item" href="visualizations/3_viz.html">Global Data</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region3">North America</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region4">South America</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" href="comparison.html">Comparison</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Global Data
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global 2022</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globalall">Global 2018/22</a></li>
+                        </ul>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link active" href="data.html">Data</a>
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/datacled">Data</a>
                     </li>
 
                 </ul>
@@ -83,233 +97,128 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg">
+                <div class="col-lg-12">
 
                     <h1 class="dark:bg-primary dark:text-white">Ukraine</h1>
                     <br>
                     <h5 class="text-light-green">Anti-Civilian Violence Data Analysis</h5>
 
-                    The Ukraine and Russian conflict has deep routes. Since the 2014 Ukrainian revolution, the annexation of 
-                    Crimea, the war in Donbas, and many conflicts in between there has consistently been hostility between the two nations. 
-                    Then with the invasion of Ukraine by Russia on 24th February 2022 conflict escalated to a major war watched by the international
-                    community.
-                    <br>
-                    <br>
-                    One major and concerning aspect of the war is the increase in violence against civilians as a tactic and result of the conflict.
-                    Many human rights organisations, news outlets, and public bodies have highlighted the insenity of Russian violence against Ukrainian 
-                    civilians and also expressed concerns over the hidden nature of such violence and the implications for Ukraine and indeed, the world. 
-                    Violence against civilians is prohibited in conflict as cemented in international law. The atrocities, then, that have been and are 
-                    being committed against the civilians of Ukraine is a war crime. 
-                    <br>
-                    <br>
-                    We have visualised the filtered data from ACLEDs conflict dataset to highlight the increase in violence against civilians and 
-                    also seek to find any patterns and compare this data to regional and global data. Is violence against civilians a growing strategy 
-                    in modern conflicts?
-
+                    <p>
+                        The Ukraine and Russian conflict has deep routes. Since the 2014 Ukrainian revolution, the
+                        annexation of
+                        Crimea, the war in Donbas, and many conflicts in between there has consistently been hostility
+                        between the two nations.
+                        Then with the invasion of Ukraine by Russia on 24th February 2022 conflict escalated to a major
+                        war
+                        watched by the international
+                        community.
                     </p>
-                </div>
-                <!-- MAP -->
-                <div class="col-md-12">
-                    <div class="card" style="width: 80rem; padding-top: 20px; padding-bottom: 20px;">
-                        <div class="card-body">
-                          <h5 class="card-title">Ukraine: Violence Against Civilians Map Plot</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Conflict locations & information</h6>
-                          <p class="card-text"></p>
-                          <div id="my_map" style="width: 1200px; height: 600px"></div>
+                    <p>
+                        One major and concerning aspect of the war is the increase in violence against civilians as a
+                        tactic
+                        and result of the conflict.
+                        Many human rights organisations, news outlets, and public bodies have highlighted the insenity
+                        of
+                        Russian violence against Ukrainian
+                        civilians and also expressed concerns over the hidden nature of such violence and the
+                        implications
+                        for Ukraine and indeed, the world.
+                        Violence against civilians is prohibited in conflict as cemented in international law. The
+                        atrocities, then, that have been and are
+                        being committed against the civilians of Ukraine is a war crime.
+                    </p>
+                    <p>
+                        We have visualised the filtered data from ACLEDs conflict dataset to highlight the increase in
+                        violence against civilians and
+                        also seek to find any patterns and compare this data to regional and global data. Is violence
+                        against civilians a growing strategy
+                        in modern conflicts?
+                    </p>
+
+
+
+                    <!-- MAP -->
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+                            <h5 class="card-title">Ukraine: Violence Against Civilians Map Plot</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Conflict locations & information</h6>
+                            <p class="card-text"></p>
+                            <br>
+                            <div id="my_map" style="width: 90vw; height: 80vh"></div>
                         </div>
                     </div>
+
+
+                    <br>
+
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+                            <h5 class="card-title">Ukraine: Fatality Count by Year</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">2018-2022</h6>
+                            <p class="card-text">
+                                The incidences and fatality count of violence against civilians has increased since
+                                2018.
+                                This directly correlates with the Russian invasion of Ukraine.
+                            </p>
+                            <br>
+                            <div id="bar" style="width: 90vw; height: 70vh"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Sub Events: Attack, Sexual Violence, and Abduction
+                            </h6>
+                            <p class="card-text">Attacks are the highest proportion of sub-event types. This correlates
+                                with
+                                reports on
+                                the hidden nature of sexual violence and abduction.
+                            </p>
+                            <br>
+                            <div id="pie" style="width: 90vw; height: 70vh"></div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col-6">
+
+                            <h5 class="card-title">Ukraine: Fatality Over Time</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"> Line Plot 2018-2022</h6>
+                            <p class="card-text"></p>
+                            <div id="lines" style="width: 90vw; height: 70vh"></div>
+                        </div>
+                    </div>
+
+
+                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                        <div>
+                            <h6>Data Source: <a href="https://acleddata.com/curated-data-files/" target="_blank"
+                                    rel="noopener noreferrer">
+                                    ACLED</a> - Anti-Civilian Violence Dataset (10 June 2022) </h6>
+                        </div>
+                    </footer>
+
                 </div>
             </div>
-            <section>
-                <br>
-            </section>
-                <div class="row">
-                        <h1 class="dark:bg-primary dark:text-white" style="width: 40rem; padding-top: 20px; padding-bottom: 20px;">Visualisations</h1>
-                        <section>
-                            <br>
-                        </section>
-                        <div class="col-6">
-                                <div class="card" style="width: 40rem; padding-top: 20px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Count by Year</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">2018-2022</h6>
-                                        <p class="card-text">The incidences and fatality count of violence against civilians has increased since 2018. 
-                                            This directly correlates with the Russian invasion of Ukraine.
-                                        </p>
-                                        <div id="bar" style="width: 600px; height: 400px"></div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-6">
-                                <div class="card" style="width: 40rem; padding-top: 20px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Count by Sub-Event Type</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">Sub Events: Attack, Sexual Violence, and Abduction </h6>
-                                        <p class="card-text">Attacks are the highest proportion of sub-event types. This correlates with reports on 
-                                            the hidden nature of sexual violence and abduction. 
-                                        </p>
-                                        <div id="pie" style="width: 600px; height: 400px"></div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-6">
-                                <div class="card" style="width: 81rem; padding-top: 20px; padding-bottom: 20px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Over Time</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"> Line Plot 2018-2022</h6>
-                                        <p class="card-text"></p>
-                                        <div id="lines" style="width: 1200px; height: 600px"></div>
-                                    </div>
-                                </div>
-                        </div>
-                        <!-- <div class="col-6">
-                                <div class="card" style="width: 40rem; padding-top: 20px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Ukraine: Fatality Count 2022</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"> SOMETHING</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <canvas id="myChart" width="400" height="400"></canvas> --
-                                    </di>
-                                </div>
-                        </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-    <!-- <script> var data = {{ geojson|safe }} </script> -->
+    <script> var data = {{ geojson| tojson}} </script>
 
-    <!-- <script src="/static/js/1_viz_ukr.js"></script> -->
-
-    <script>
-        var data = {{ geojson|safe }};
-      
-        var myMap = L.map("my_map", {
-            center: [49.05, 33.22],
-            zoom: 6, 
-        });
-
-        // Add tile layer 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(myMap);
-
-        var markers = {
-            opacity: 1,
-            fillOpacity: 1,
-            fillColor: "orange",
-            color: "orange",
-            //radius: fatalities
-            radius: 3,
-            stroke: true,
-            weight: 0.5
-        };
-
-
-        L.geoJSON(data, {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, markers);
-            },
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup("Location: " + feature.properties.location
-                    + "<br> Event Date: " + feature.properties.event_date
-                    + "<br>Sub-Event Type: " + feature.properties.sub_event_type
-                    + "<br>Fatalities: " + feature.properties.fatalities
-                    + "<br>Notes: " + feature.properties.notes)
-           
-            }
-        }).addTo(myMap);
-
-
-        // Bar Plot 
-
-        var featuresData = data["features"]
-        var year = []
-        var fatalities = []
-        var subEventType = []
-        var event_date = []
-
-
-        console.log(featuresData.length)
-
-
-        for (i=0; i<featuresData.length; i++){
-            year.push(featuresData[i]['properties']['year']);
-            fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
-            subEventType.push(featuresData[i]['properties']['sub_event_type']);
-            event_date.push(featuresData[i]['properties']['event_date']);      
-        }
-
-
-
-        var trace1 = {
-            x: year,
-            y: fatalities,
-            name: 'Fatalities',
-            type: "bar",
-            marker: {
-                color: "orange"
-        }};
-
-
-        varData = [trace1];
-    
-        var barLayout = { 
-            barmode: 'bar',
-            title: "Fatalities over time: 2018-2022" };
-        // plot
-        Plotly.newPlot("bar", varData, barLayout);
-
-
-
-        // Pie Plot 
-
-        function piePlot() {
-
-            pieData = [
-                {
-                    values: fatalities,
-                    labels: subEventType,
-                    type: "pie",
-                    insidetextorientation: "radial"
-                }
-            ];
-
-            var pieLayout = { 
-                title: "Fatalities by Sub Event Type"};
-            // plot
-            Plotly.newPlot("pie", pieData, pieLayout);
-
-            };
-
-        piePlot()
-
-
-        function plotLines() {
-
-            lineData = [
-                {
-                    x: event_date,       
-                    y: fatalities,
-                    //text: ,
-                    type: "scatter"
-                }
-            ];
-
-            var linesLayout = { title: "Conflict Fatalities" };
-            // plot
-            Plotly.newPlot("lines", lineData, linesLayout);
-
-            };
-
-        plotLines()
-
-
-</script>
+    <script src="/static/js/1_viz_ukr.js"></script>
 
 </body>
 

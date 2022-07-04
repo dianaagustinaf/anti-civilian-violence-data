@@ -7,7 +7,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
 </head>
 ​
@@ -39,6 +39,8 @@
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
                             <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region3">North America</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region4">South America</a></li>
                         </ul>
                     </li>
 
@@ -49,9 +51,8 @@
                             Global Data
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global Plot</a></li>
-                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globalmap">Global Map</a></li>
-                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globalall">Global Overview</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global 2022</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globalall">Global 2018/22</a></li>
                         </ul>
                     </li>
 
@@ -80,20 +81,7 @@
                     <br>
                     <h5 class="text-light-orange">Anti-Civilian Violence Data Analysis</h5>
                     <br>
-                    <p>{{ txt }}</p>
-
-                    <ul>
-
-                        {% for url in listurl %}
-
-                        <li>
-                            <a href="{{ url }}" target="_blank" rel="noopener noreferrer"> {{ url }} </a>
-                        </li>
-
-                        {% endfor %}
-
-                    </ul>
-
+                    
                     <p>
                         The war in Ukraine has been at the forefront of global news for the past few months. 
                         Many news outlets have claimed that human rights abuses have been occurring in the 
@@ -119,7 +107,7 @@
                         <div class="row">
                             <div class="col-md-6">
 
-                                <h1 class="dark:bg-primary dark:text-white">Visualisations</h1>
+                                <!-- <h1 class="dark:bg-primary dark:text-white">Visualisations</h1> -->
                             </div>
                         </div>
                     </div>
