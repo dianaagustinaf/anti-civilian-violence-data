@@ -7,7 +7,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
@@ -35,12 +35,11 @@
 </head>
 
 <body>
-
+    <br>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light-green" href="index.html" style="color: rgb(253, 141, 66)">Anti-Civilian
-                Violence</a>
+            <a class="navbar-brand text-light-orange" href="http://127.0.0.1:5000/">Anti-Civilian Violence</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -48,24 +47,40 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/ukraine">Ukraine</a>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Plots
+                            Regional Data
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="visualizations/1_viz.html">Ukraine</a></li>
-                            <li><a class="dropdown-item" href="visualizations/2_viz.html">Regional Data</a></li>
-                            <li><a class="dropdown-item" href="visualizations/3_viz.html">Global Data</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region1">Europe</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region2">Middle East</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region3">North America</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/region4">South America</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" href="comparison.html">Comparison</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Global Data
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globaldata">Global 2022</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:5000/api/v1.0/globalall">Global 2018/22</a></li>
+                        </ul>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link active" href="data.html">Data</a>
+                        <a class="nav-link active" href="http://127.0.0.1:5000/api/v1.0/datacled">Data</a>
                     </li>
 
                 </ul>
