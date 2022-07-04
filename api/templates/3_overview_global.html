@@ -21,6 +21,8 @@
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 </head>
+
+
 <body>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -78,42 +80,73 @@
     </section>
 
   <!-- SUMARY -->
-  <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
 
-                <p>TOTAL FATALITIES GLOBALLY</p>
-            </div> 
+    <!-- CONTENT -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- SUMARY -->
+                    <h1 class="dark:bg-primary dark:text-white">Total Fatalities Globally</h1>
+                    
+                    <br> 
+                    <!-- BAR -->
+
+                    <div class="row row-cols-1 row-cols-md-1 g-1">
+
+                        <div class="col">
+
+                            <h3 class="card-title">Global Fatalities by Region</h3>
+                            <h4 class="card-subtitle mb-2 text-muted">By year: 2018 - 2022</h4>
+                            
+                            <p class="card-text">
+                                When we analyse the total fatalities from 2018 to 2020 its apparent fatalities across the globe 
+                                range around the same total during these years, the top region with the most fatalities remains consistent being North America and Western Africa coming close. 
+                                <br>
+                                As we drill down further into this data, 2021 surprisingly has the highest number of fatalities which we didn’t expect since we initially thought the pandemic 
+                                and global lockdowns would have decreased the total of fatalities.
+                                <br>
+                                Across all years Eastern Asia appears to have the lowest total of fatalities, 
+                                this may be due to regulations around the data they choose to publish and share with the world. 
+                                <br>
+                                Southern Africa has the lowest number of fatalities in comparison to other parts of Africa, 
+                                particularly Western Africa which has the highest amount each year. 
+                                <br>
+                                Our dataset captured fatalities up to June 2022 providing us with near-enough real-time data, as it stands 
+                                the total of fatalities for Europe is in triple digits which shows the war in Ukraine has already made an impact.         
+
+                            </p>
+                            
+                            <br>
+                            <div id="chartdiv" style="width: 90vw; height: 90vh"></div>
+                        </div>
+                    </div>
+ 
+
+                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                        <div>
+                            <h6>Data Source: <a href="https://acleddata.com/curated-data-files/" 
+                                target="_blank" rel="noopener noreferrer">
+                                ACLED</a> - Anti-Civilian Violence Dataset (10 June 2022) </h6>
+                        </div>
+                    </footer>
+
+                </div>
+            </div>
         </div>
-    </div>       
-  </section>
-    <div id="chartdiv"></div>
-    <h3 class="card-title">Global Fatalities by Region</h3>
-    <h4 class="card-subtitle mb-2 text-muted"> 2018 - 2022</h4>
-  
-    <p class="card-text">When we analyse the total fatalities from 2018 to 2020 its apparent fatalities across the globe 
-        range around the same total during these years, the top region with the most fatalities remains consistent being North America and Western Africa coming close. 
-        <br><br>
-        As we drill down further into this data, 2021 surprisingly has the highest number of fatalities which we didn’t expect since we initially thought the pandemic 
-        and global lockdowns would have decreased the total of fatalities.
-        <br><br>
-        Across all years Eastern Asia appears to have the lowest total of fatalities, 
-        this may be due to regulations around the data they choose to publish and share with the world. 
-        <br><br>
-        Southern Africa has the lowest number of fatalities in comparison to other parts of Africa, 
-        particularly Western Africa which has the highest amount each year. 
-        <br><br>
-        Our dataset captured fatalities up to June 2022 providing us with near-enough real-time data, as it stands 
-        the total of fatalities for Europe is in triple digits which shows the war in Ukraine has already made an impact.         
-    </p>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-<script>
-    var data = {{geojson|tojson}};
-</script>
-<script src="/static/js/3_overview_global.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+        var data = {{geojson|tojson}};
+    </script>
+    <script src="/static/js/3_overview_global.js"> </script>
 
 </body>
 </html>
