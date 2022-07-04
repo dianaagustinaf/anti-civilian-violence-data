@@ -1,7 +1,7 @@
 //console.log(data);
 
 var myMap = L.map("my_map", {
-    center: [28.31, 41.59],
+    center: [-21.31, -60.59],
     zoom: 3,
     minZoom: 3
 });
@@ -187,4 +187,3 @@ function piePlot() {
     };
 
 piePlot()
-
