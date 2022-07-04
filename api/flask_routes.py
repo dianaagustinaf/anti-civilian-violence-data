@@ -44,6 +44,8 @@ def welcome():
     ukr ="http://127.0.0.1:5000/api/v1.0/ukraine"
     reg1 ="http://127.0.0.1:5000/api/v1.0/region1"
     reg2 ="http://127.0.0.1:5000/api/v1.0/region2"
+    reg3 ="http://127.0.0.1:5000/api/v1.0/region3"
+    reg4 ="http://127.0.0.1:5000/api/v1.0/region4"
     glo ="http://127.0.0.1:5000/api/v1.0/globaldata"
     glomap ="http://127.0.0.1:5000/api/v1.0/globalmap"
     globall ="http://127.0.0.1:5000/api/v1.0/globalall"
@@ -53,6 +55,8 @@ def welcome():
     listurl.append(ukr)
     listurl.append(reg1)
     listurl.append(reg2)
+    listurl.append(reg3)
+    listurl.append(reg4)
     listurl.append(glo)
     listurl.append(glomap)
     listurl.append(globall)

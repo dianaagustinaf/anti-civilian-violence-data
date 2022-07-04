@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 ​
 
@@ -7,6 +8,7 @@
     <title>Anti-Civilian Violence Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Leaflet JavaScript code -->
@@ -34,6 +36,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 ​
+
 <body>
 
     <!-- NAVBAR -->
@@ -75,18 +78,22 @@
             </div>
         </div>
     </nav>
-    <br>
 
+    <section>
+        <br>
+    </section>
+
+    <!-- CONTENT -->
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-12">
 
                     <!-- SUMARY -->
                     <h1 class="dark:bg-primary dark:text-white">Middle East</h1>
                     <br>
                     <p>
-                        Middle East is Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nobis dolore,
+                        Europe is Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nobis dolore,
                         exercitationem atque pariatur quod delectus quis quasi animi dolorem quia sunt ipsam culpa
                         tempora fuga, consectetur eum, amet quas.
                         Then with the invasion of Ukraine by Russia on (date) Feb 2022, Ukraine was again at the
@@ -98,39 +105,47 @@
                     <br>
 
                     <!-- VIZ / MAP -->
+
+                    <!-- MAP -->
+
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
                         <div class="col">
                             <h3 class="card-title">Violence Against Civilians (2018-2022)</h3>
                             <h4 class="card-subtitle mb-2 text-muted">Conflict locations & information</h4>
                             
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa facere sed et ab laboriosam. Dolorem, asperiores? Praesentium repudiandae nihil ad modi laudantium harum hic commodi mollitia cupiditate, repellendus id cum.
-                                 Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
+                            <p class="card-text">
+                                Each dot on the map is an attack on civilians. 
+                                The size of the circles is defined by the number of victims killed in the attack. 
+                                For this case, we have differentiated with black colour the occurred events in Ukraine. 
                             </p>
                             <br>
-                            <div id="my_map" style="width: 70vw; height: 70vh"></div>
+                            <div id="my_map" style="width: 90vw; height: 70vh"></div>
+                            <br>
                         </div>
                     </div>
 
-                    <br>
+                    <br> 
+                    <!-- BAR -->
 
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
                         <div class="col">
 
                             <h3 class="card-title">Fatalities by Year</h3>
-                            <h4 class="card-subtitle mb-2 text-muted">2010 - 2022</h4>
+                            <h4 class="card-subtitle mb-2 text-muted">2018 - 2022</h4>
                             
-                            <p class="card-text">Some quick example text to build on the card title and make up the
+                            <p class="card-text">
+                                Some quick example text to build on the card title and make up the
                                 bulk of the card's content.</p>
                             
                             <br>
-                            <div id="bar" style="width: 70vw; height: 70vh"></div>
+                            <div id="bar" style="width: 90vw; height: 70vh"></div>
                         </div>
                     </div>
-
+ 
                     <br>
+                    <!-- PIE -->
 
                     <div class="row row-cols-1 row-cols-md-1 g-1">
 
@@ -139,22 +154,31 @@
                             <h3 class="card-title">Fatalities % by Event Type</h3>
                             <h4 class="card-subtitle mb-2 text-muted"> 2018 - 2022</h4>
                             
-                            <p class="card-text">Some quick example text to build on the card title and make up the
+                            <p class="card-text">
+                                Some quick example text to build on the card title and make up the
                                 bulk of the card's content.
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque exercitationem totam deleniti maiores. Eaque tenetur quae, deserunt et quia modi quasi adipisci possimus corporis, in assumenda quisquam fuga libero totam.
                             </p>
                             
                             <br>
-                            <div id="pie" style="width: 70vw; height: 70vh"></div>
+                            <div id="pie" style="width: 90vw; height: 70vh"></div>
 
                         </div>
                     </div>
 
-                <h5>Data Source: ACLED ----  LINK </h5>
+                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                        <div>
+                            <h6>Data Source: <a href="https://acleddata.com/curated-data-files/" 
+                                target="_blank" rel="noopener noreferrer">
+                                ACLED</a> - Anti-Civilian Violence Dataset (10 June 2022) </h6>
+                        </div>
+                    </footer>
+
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <script>
         var data = {{ geojson| tojson}};
