@@ -1,12 +1,22 @@
 
 .text-light-orange{
-    color: rgb(253, 141, 66);
+    color: orange;
 }
 
-.data-table{
+/* .data-table{
     border: 1px;
     box-sizing: border-box;
     border-color: black;
+} */
+
+#pie-chart {
+    margin: 0 auto;
+    height: 450px;
+  }
+
+p {
+    align-content: center;
+    font-size: larger;
 }
 
 /* #my_map { height: calc(100% - 44px); width: 100%; position: absolute !important; } */
@@ -20,47 +30,4 @@
     padding: 10%;
 } */
 
-p {
-    align-content: center;
-    font-size: larger;
-}
-
-body {
-    margin: 20px auto;
-    font-family: 'Lato';
-    font-weight: 300;
-    text-align: center;
-  }
-  
-#pie-chart {
-    margin: 0 auto;
-    height: 450px;
-  }
-
-/* map */
-
-/* #map{
-    position: absolute;
-    height:1000px;
-    width: 100%;
-    border-radius: 10px;
-    top: 105px;
-    left: 0;
-} */
-
-
 /*
-
-h1 {
-    text-align: center;
-    color: rgb(2, 216, 38);
-    background-color: rgb(0, 0, 0);
-}
-*/
-
-
-/*
-body{
-    background-color: rgb(1, 1, 20);
-}
-*/

@@ -1,71 +1,39 @@
 //console.log(data);
 
-
-// var data = {{ geojson|safe }};
-// create map
-// var layers = {
-//     2018: new L.LayerGroup(),
-//     2019: new L.LayerGroup(),
-//     2020: new L.LayerGroup(),
-//     2021: new L.LayerGroup(),
-//     2022: new L.LayerGroup(),
-// };
-
-// var overlays = {
-//     "2018": layers.2018,
-//     "2019": layers.2019, 
-//     "2020": layers.2020,
-//     "2021": layers.2021,
-//     "2022": layers.2022
-    
-// }
 var myMap = L.map("my_map", {
-    center: [49.05, 33.22],
-    zoom: 3, 
-    // layers: [
-    //     layers.2018, 
-    //     layers.2019, 
-    //     layers.2020,
-    //     layers.2021,
-    //     layers.2022
-    // ]
+    center: [48.31, 22.59],
+    zoom: 4,
+    minZoom: 3
 });
 
-// Add tile layer 
+// tile layer 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// L.control.layers(null, overlays).addTo(myMap);
+// Color
+function chooseColor(country) {                   
+    if (country == "Ukraine") {
+        return "black";
+    } else {
+        return "orange";
+    }
+}
 
-// // Legend to display information about map
-// var info = L.control({
-//     position: "bottomright"
-// });
-
-// info.onAdd = function() {
-// var div = L.DomUtil.create("div", "legend");
-// return div;
-// };
-// // Add the info legend to the map.
-// info.addTo(myMap);
-
-
-
-// loop over geojson to find radius size 
-//    var fatalities = []
-
-//     for (i=0; i< featuresData.length; i++){
-//         fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
-//     }
+//Size / Radius
+function markerSize(number) {
+    if (number==0) {
+        number=1
+    }
+    return Math.sqrt(number) * 4;
+  }
 
 var markers = {
-    opacity: 0.7,
-    fillOpacity: 0.7,
-    fillColor: "orange",
+    //opacity: 0.7,       // onEachFeature
+    //fillOpacity: 0.7,
     color: "orange",
-    //radius: fatalities
-    radius: 3,
+    //fillColor: "orange",
+    //radius: 5,
     stroke: true,
     weight: 0.5
 };
@@ -76,123 +44,147 @@ L.geoJSON(data, {
         return L.circleMarker(latlng, markers);
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup("<h3> Location: " + feature.properties.location
-            + "</h3> <br> Event Date: " + feature.properties.event_date
+
+        layer.on({
+            mouseover: function (event) {
+                layer = event.target;
+                layer.setStyle({
+                    fillOpacity:0.8
+                })
+            },
+
+            mouseout: function (event) {
+                layer = event.target;
+                layer.setStyle({
+                    fillOpacity:0.5
+                })
+            }
+
+            //click: zoomToFeature
+            });
+
+        layer.setStyle({
+            radius: markerSize(parseInt(feature.properties.fatalities)),
+            fillColor: chooseColor(feature.properties.country)
+        })
+
+        layer.bindPopup("<h5> Location: " + feature.properties.location
+            + "</h5> <br> Event Date: " + feature.properties.event_date
             + "<br>Sub-Event Type: " + feature.properties.sub_event_type
             + "<br>Fatalities: " + feature.properties.fatalities
             + "<br>Notes: " + feature.properties.notes)
-        // layer.on({
-        // mouseover: highlightFeature,
-        // mouseout: resetHighlight,
-        // click: zoomToFeature
-        // });
     }
 }).addTo(myMap);
 
 
-// Bar Plot 
+// let group = L.markerClusterGroup();
+// myMap.addLayer(group);
+
+///////////////////////////////////// Data for bar and pie
+
 var featuresData = data["features"]
 var year = []
 var fatalities = []
-var locations = []
 var subEventType = []
 
 
 for (i=0; i< featuresData.length; i++){
     year.push(featuresData[i]['properties']['year']);
-    fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
+    fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));
+    subEventType.push(featuresData[i]['properties']['sub_event_type']);          
 }
 
-function plotCharts() {
+yearlist = [2018,2019,2020,2021,2022]
+
+function sumFatalities(yearraw, fatalitiesraw) {
+
+    let fatalitieslist = [0,0,0,0,0]
+
+    for (let i = 0; i < yearraw.length; i++) {
+        const year = yearraw[i];
+        const fatality = fatalitiesraw[i];
+
+        if (year == 2018) {
+            fatalitieslist[0] = fatalitieslist[0] + fatality       
+        } else if (year == 2019) {
+            fatalitieslist[1] = fatalitieslist[1] + fatality
+        } else if (year == 2020) {
+            fatalitieslist[2] = fatalitieslist[2] + fatality
+        } else if (year == 2021) {
+            fatalitieslist[3] = fatalitieslist[3] + fatality
+        } else if (year == 2022) {
+            fatalitieslist[4] = fatalitieslist[4] + fatality
+        }
+    }
+    console.log(fatalitieslist);
+    return fatalitieslist;
+}
+
+let fatalitiessumlist = sumFatalities(year,fatalities);
+
+
+/////////////////////////////////////////////// Bar Plot 
+
+function barPlot() {
 
     varData = [
         {
-            x: year,
-            y: fatalities,
-            //text: ,
-            type: "bar"
+            x: yearlist,
+            y: fatalitiessumlist,
+            text: fatalitiessumlist.map(String),
+            textposition: 'auto',
+            hoverinfo: 'none',
+            type: "bar",
+            marker: {
+                color: 'orange',
+                opacity: 0.9,
+                line: {
+                  color: 'black',
+                  width: 1.5
+                }
+            }
         }
     ];
 
-    var barLayout = { title: "Fatalities over time: 2018-2022" };
+    var barLayout = { 
+        title: "Civilian Fatalities Over Time: 2018-2022",
+        barmode: 'stack'
+    };
     // plot
     Plotly.newPlot("bar", varData, barLayout);
 
 };
 
-plotCharts()
+barPlot()
 
-// Pie Plot 
+/////////////////////////////////////////////////////// Pie Plot 
 
-for (i=0; i< featuresData.length; i++){
-    subEventType.push(featuresData[i]['properties']['sub_event_type']);
-    fatalities.push(parseInt(featuresData[i]['properties']['fatalities']));          
-}
+var ultimateColors = ['rgb(255, 165, 0)','rgb(0, 0, 0)', 'rgb(255, 80, 0)', 'rgb(30, 30, 167)']
 
 function piePlot() {
 
-pieData = [
-    {
-        values: fatalities,
-        labels: subEventType,
-        type: "pie",
-        insidetextorientation: "radial"
-    }
-];
+    pieData = [
+        {
+            values: fatalities,
+            labels: subEventType,
+            type: "pie",
+            marker: {
+                colors: ultimateColors
+            },
+            textinfo: "label+percent",
+            textposition: "outside",
+            hole: .3,
+            rotation: 135
+        }
+    ];
 
-var pieLayout = { 
-    title: "Fatalities by Sub Event Type"};
-// plot
-Plotly.newPlot("pie", pieData, pieLayout);
+    var pieLayout = { 
+        title: "Fatalities by Sub Event Type"
+    };
 
-};
+    Plotly.newPlot("pie", pieData, pieLayout);
+
+    };
 
 piePlot()
 
-
-
-
-////////////////////////////////////////////////////
-
-
-// PLOTLY WITH FILTERED QUERY
-
-
-// // Arrays to hold movies by decade
-// fatalities_list = [];
-// year_list = [];
-
-// //dataok = data[]
-// // For loop to go through all movies
-// for (let i = 0; i < data.length; i++) {
-
-//   // Variable to hold current movie in loop
-//   const event = data[i];
-//   const properties = event[0].properties;
-//   console.log(properties);
-//   fatalities = properties.fatalities;
-//   console.log(fatalities);
-
-//   fatalities_list.push(properties.fatalities);
-//   year_list.push(properties.year);
-
-// };
-
-// //let country = "Ukraine";
-// let title = `Ukraine's Total Civilian Fatalities Per Year Plotly Chart`;
-
-// // Assign `x` and `y` values for the Plotly trace object
-// let trace1 = {
-//   x: year_list,
-//   y: fatalities_list,
-//   type: 'bar'
-// };
-
-// // Leave the code below unchanged
-// let data_plot = [trace1];
-
-// let layout = {
-//   title: title
-// };
-
-// Plotly.newPlot("plot", data_plot, layout);

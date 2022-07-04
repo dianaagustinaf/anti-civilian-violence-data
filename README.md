@@ -21,9 +21,6 @@ https://user-images.githubusercontent.com/96545188/177059557-ca1e61f4-e560-4cf5-
 
 For visualisations we used Javascript packages `plotly`, `leaflet` and `amCharts`.
 
-## Analysis 
-We found some interesting... 
-
 ## Finally... How to Run this Project
 
 ```python
