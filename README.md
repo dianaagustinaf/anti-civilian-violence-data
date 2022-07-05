@@ -15,7 +15,8 @@ Once we cleaned and manipulated the data in `jupyter notebook` we saved our clea
 As we obtained latitude and longitude decidedn to optimise the data by turning our data into `geoJSON` format, then we moved on to creating API routes for Global, Ukraine and Regional data. Our clean data set had over 100,000 line so queries were created to filter our data for intended use. 
 
 ## Final Visualisation 
-https://user-images.githubusercontent.com/96545188/177221049-95147799-8915-4e25-bcf0-cdd69dfbc7f4.mp4
+
+https://user-images.githubusercontent.com/96545188/177249800-2d4b9b4e-1896-4824-84e1-bd5d11d12b4f.mp4
 
 For visualisations we used Javascript packages `plotly`, `leaflet` and `amCharts`.
 
